@@ -1,0 +1,89 @@
+
+서버
+
+1. 컨테이너
+
+- arrary<Session> Clients
+서버에서 관리하는 클라이언트들의 정보
+
+- RecvQueue 
+서버에서 처리 할 Recv데이터의 모음
+
+- SendQueue
+서버에서 각 클라이언트들에게 Brodcast할 Send데이터의 모음
+
+
+2. 알고리즘
+
+1. 스레드
+	- RecvThread (각 세션마다 하나씩 할당)
+	하나의 클라이언트가 접속하면 생성
+	해당 클라이언트가 접속 종료하면 소멸
+	Recv를 반복한다
+	Recv한 데이터를 RecvQueue로 push
+
+	- SendThread
+	서버가 생성되면 생성
+	서버가 종료되면 소멸
+	SendQueue를 확인한다
+	만약 SendQueue에 pop할 데이터가 있다면
+	BrodCast 함수를 호출
+
+
+2. 함수
+- RecvHandler()
+서버가 Running중 일 때 반복해서 호출
+
+RecvQueue를 확인한다
+RecvQueue에 pop할 데이터가 있다면
+pop하고 해당 데이터를 처리한다.
+
+
+- BrodCast (SendThread) (인자: 데이터를 받는 클라이언트, 데이터 배열)
+데이터를 모든 클라이언트에게 전송할 지
+특정 클라이언트에게 전송할 지
+확인 후 해당되는 데이터를 전송한다
+
+
+
+
+
+
+
+클라이언트
+
+1.컨테이너
+
+- RecvQueue 
+클라이언트에서 처리 할 Recv데이터의 모음
+- SendQueue
+서버에게 Send할 데이터의 모음
+
+2. 알고리즘
+
+1. 함수
+-EventHander
+게임이 생성될 때 생성
+게임이 종료되면 종료
+게임에서 이벤트가 발생했을 때
+이벤트에 맞는 데이터생성해서 SendQueue로 push
+
+- RecvHandler()
+게임이 Running중 일 때 반복해서 호출
+RecvQueue를 확인한다
+RecvQueue에 pop할 데이터가 있다면
+pop하고 해당 데이터를 처리한다.
+
+2. 스레드
+- RecvThread
+클라이언트가 서버에 접속하면 생성
+해당 클라이언트가 접속 종료하면 소멸
+Recv를 반복한다
+Recv한 데이터를 RecvQueue로 push
+
+- SendThread
+게임이 시작되면 생성
+게임이 종료되면 소멸
+SendQueue를 확인한다
+만약 SendQueue에 pop할 데이터가 있다면
+Send 함수를 호출, 데이터를 서버로 보낸다
