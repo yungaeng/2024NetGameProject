@@ -3,6 +3,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 
 #include <windows.h>
+
 #include <mmsystem.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -134,7 +135,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	case WM_CREATE:
 		DialogBox(g_hInst, MAKEINTRESOURCE(IDD_DIALOG1), hWnd, Dlalog_Proc);
 
-		PlaySound(TEXT("ca_bgm.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP | SND_NODEFAULT);
+		//PlaySound(TEXT("ca_bgm.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP | SND_NODEFAULT);
 
 		itemBit = (HBITMAP)LoadBitmap(g_hInst, MAKEINTRESOURCE(IDB_BITMAP19));
 
@@ -628,6 +629,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 				MessageBox(hWnd, L"DRAW", L"GameResult", MB_OK);
 		}
 	}
+ 
+
 		InvalidateRect(hWnd, NULL, FALSE);
 		break;
 	case WM_KEYDOWN: // MOVE: wasd // BUBBLE: f  0
@@ -742,12 +745,14 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	case WM_KEYUP:
 		movementA = 0; movementB = 0;
 		AMovingTime = 0; BMovingTime = 0;
+
 		InvalidateRect(hWnd, NULL, FALSE);
 		break;
 	case WM_PAINT:
 		hdc = BeginPaint(hWnd, &ps);
 		memdc = CreateCompatibleDC(hdc);
 		SelectObject(memdc, hBit1);
+
 
 		// BG_DRAW
 		for(int y = 0; y < 13; y++)
