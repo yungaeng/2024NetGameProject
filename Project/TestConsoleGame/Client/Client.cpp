@@ -1,10 +1,17 @@
+#pragma comment(lib, "ws2_32") // ws2_32.lib 링크
+
+#include <winsock2.h>
+#include <ws2tcpip.h>
+
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
 #include <conio.h>
 #include <windows.h>
-
 using namespace std;
+
+#define SERVERPORT 9000
+#define BUFSIZE    512
 
 const int MAP_SIZE = 12;
 const char EMPTY = '.';
@@ -57,7 +64,7 @@ void updateCharacterPosition(char map[MAP_SIZE][MAP_SIZE], int oldX, int oldY) {
 }
 
 // 캐릭터 이동 함수
-void moveCharacter(char map[MAP_SIZE][MAP_SIZE], char direction) {
+void moveCharacter(char map[MAP_SIZE][MAP_SIZE], char direction, SOCKET sock) {
     int oldX = characterX;
     int oldY = characterY;
 
@@ -66,16 +73,48 @@ void moveCharacter(char map[MAP_SIZE][MAP_SIZE], char direction) {
     case 'a': if (characterX > 0) characterX--; break;
     case 's': if (characterY < MAP_SIZE - 1) characterY++; break;
     case 'd': if (characterX < MAP_SIZE - 1) characterX++; break;
-    default: return;  // 유효하지 않은 입력
+    default: return;
     }
 
     // 이전 위치와 새로운 위치를 업데이트
     map[oldY][oldX] = EMPTY;
     map[characterY][characterX] = CHARACTER;
     updateCharacterPosition(map, oldX, oldY);
+
+    // 새로운 위치를 서버로 전송 (int 형식으로 전송)
+    int position[2] = { characterX, characterY };
+    send(sock, (char*)position, sizeof(position), 0);
 }
 
-int main() {
+int main()
+{
+    // 윈속 초기화
+    WSADATA wsa;
+    if (WSAStartup(MAKEWORD(2, 2), &wsa) != 0)
+        return 1;
+
+    // 소켓 생성
+    SOCKET sock = socket(AF_INET, SOCK_STREAM, 0);
+    if (sock == INVALID_SOCKET)
+    {
+        cout << "소켓 생성 실패" << endl;
+        return 1;
+    }
+
+    // connect()
+    struct sockaddr_in serveraddr;
+    memset(&serveraddr, 0, sizeof(serveraddr));
+    serveraddr.sin_family = AF_INET;
+    inet_pton(AF_INET, "127.0.0.1", &serveraddr.sin_addr);
+    serveraddr.sin_port = htons(SERVERPORT);
+    int retval = connect(sock, (struct sockaddr*)&serveraddr, sizeof(serveraddr));
+    if (retval == SOCKET_ERROR) {
+        cout << "Connect 실패, 서버와 연결할 수 없습니다" << endl;
+        return 1;
+    }
+
+    cout << "서버를 찾았습니다" << endl;
+
     char map[MAP_SIZE][MAP_SIZE];
     char input;
 
@@ -84,16 +123,17 @@ int main() {
     printMap(map);
 
     while (true) {
-        if (_kbhit()) {  // 키 입력이 있는지 확인
-            input = _getch();
+        if (_kbhit()) {
+            char input = _getch();
             if (input == 'q') {
                 break;
             }
-            moveCharacter(map, input);
+            moveCharacter(map, input, sock); // sock을 인자로 전달
         }
     }
 
-    setCursorPosition(0, MAP_SIZE + 1);  // 게임 종료 메시지 위치 조정
-    cout << "Game Over!\n";
+    // 소켓 닫기 및 윈속 종료
+    closesocket(sock);
+    WSACleanup();
     return 0;
 }
