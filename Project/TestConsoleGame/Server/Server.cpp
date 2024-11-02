@@ -64,14 +64,15 @@ DWORD WINAPI RecvThread(LPVOID arg)
     struct sockaddr_in clientaddr;
     int addrlen = sizeof(clientaddr);
     getpeername(client_sock, (struct sockaddr*)&clientaddr, &addrlen);
-
+    bool IsRunnig = true;
     char addr[INET_ADDRSTRLEN];
     inet_ntop(AF_INET, &clientaddr.sin_addr, addr, sizeof(addr));
     cout << "[TCP 서버] 클라이언트 접속 : IP 주소 = " << addr << ", 포트 번호 = " << ntohs(clientaddr.sin_port) << endl;
 
     char x, y;
-    while (true) {
+    while (IsRunnig) {
         // 정수형 위치 수신
+
         int retval = recv(client_sock, &x, sizeof(int), 0);
         if (retval <= 0) {
             cout << "[TCP 서버] 클라이언트 종료: IP 주소 : " << addr << " 포트 번호 : " << ntohs(clientaddr.sin_port) << endl;
@@ -82,6 +83,11 @@ DWORD WINAPI RecvThread(LPVOID arg)
         if (retval <= 0) {
             cout << "[TCP 서버] 클라이언트 종료: IP 주소 : " << addr << " 포트 번호 : " << ntohs(clientaddr.sin_port) << endl;
             break;
+        }
+
+        else
+        {
+            IsRunnig = false;
         }
 
         // 큐에 위치 정보 추가
