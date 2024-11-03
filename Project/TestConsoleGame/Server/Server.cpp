@@ -5,21 +5,16 @@
 #include <iostream>
 #include <queue>
 #include <mutex>
+#include "protocol.h"
 
 using namespace std;
 
 #define SERVERPORT 9000
 #define BUFSIZE    512
+#define MAP_SIZE    10
 
 SOCKET listen_sock;
-queue<pair<int, int>> RecvQueue;
-mutex queue_mutex; // 큐 접근 보호를 위한 뮤텍스
-
-// 클라이언트 위치 정보를 출력하는 함수
-void RecvHandler(int x, int y)
-{
-    cout << "클라이언트의 현재 위치: (" << x << ", " << y << ")" << endl;
-}
+std::vector<SOCKET> client_sockets; // 접속된 모든 클라이언트의 소켓을 관리
 
 // 서버 초기화 함수
 int Init()
@@ -58,50 +53,46 @@ int Init()
 }
 
 // 클라이언트로부터 위치 정보를 수신하는 스레드
-DWORD WINAPI RecvThread(LPVOID arg)
-{
+DWORD WINAPI RecvThread(LPVOID arg) {
     SOCKET client_sock = (SOCKET)arg;
     struct sockaddr_in clientaddr;
     int addrlen = sizeof(clientaddr);
     getpeername(client_sock, (struct sockaddr*)&clientaddr, &addrlen);
-    bool IsRunnig = true;
     char addr[INET_ADDRSTRLEN];
     inet_ntop(AF_INET, &clientaddr.sin_addr, addr, sizeof(addr));
     cout << "[TCP 서버] 클라이언트 접속 : IP 주소 = " << addr << ", 포트 번호 = " << ntohs(clientaddr.sin_port) << endl;
 
-    char x, y;
-    while (IsRunnig) {
-        // 정수형 위치 수신
-
-        int retval = recv(client_sock, &x, sizeof(int), 0);
-        if (retval <= 0) {
-            cout << "[TCP 서버] 클라이언트 종료: IP 주소 : " << addr << " 포트 번호 : " << ntohs(clientaddr.sin_port) << endl;
+    Packet packet;
+    while (true) {
+        int retval = recv(client_sock, (char*)&packet, sizeof(packet), 0);
+        if (retval == SOCKET_ERROR) {
+            int error_code = WSAGetLastError();
+            cout << "recv 실패. 에러 코드: " << error_code << endl;
             break;
         }
-
-        retval = recv(client_sock, &y, sizeof(int), 0);
-        if (retval <= 0) {
-            cout << "[TCP 서버] 클라이언트 종료: IP 주소 : " << addr << " 포트 번호 : " << ntohs(clientaddr.sin_port) << endl;
+        else if (retval == 0) {
+            // 연결 종료
+            cout << "[TCP 서버] 클라이언트 연결 종료" << endl;
             break;
         }
+        if (retval > 0) {
+            cout << "수신 패킷 - 크기: " << packet.size << ", 타입: " << packet.type
+                << ", x: " << packet.x << ", y: " << packet.y << endl;
 
-        else
-        {
-            IsRunnig = false;
+            for (auto& sock : client_sockets) {
+                if (sock != client_sock) { // 송신자에게는 전송하지 않음
+                    send(sock, (char*)&packet, sizeof(packet), 0);
+                }
+            }
         }
-
-        // 큐에 위치 정보 추가
-        queue_mutex.lock();
-        RecvQueue.push(make_pair(x, y));
-        queue_mutex.unlock();
     }
 
     closesocket(client_sock);
     return 0;
 }
 
-int main()
-{
+
+int main() {
     if (Init())
         return -1;
 
@@ -112,6 +103,7 @@ int main()
 
         client_sock = accept(listen_sock, (struct sockaddr*)&clientaddr, &addrlen);
         if (client_sock != INVALID_SOCKET) {
+            client_sockets.push_back(client_sock);
             HANDLE hThread = CreateThread(NULL, 0, RecvThread, (LPVOID)client_sock, 0, NULL);
             if (hThread == NULL) {
                 closesocket(client_sock);
@@ -120,19 +112,13 @@ int main()
                 CloseHandle(hThread);
             }
         }
-
-        while (!RecvQueue.empty()) {
-            // 큐에서 위치 정보를 가져오기 전에 뮤텍스를 잠금
-            queue_mutex.lock();
-            pair<int, int> position = RecvQueue.front();
-            RecvQueue.pop();
-            queue_mutex.unlock();
-
-            RecvHandler(position.first, position.second);
-        }
     }
 
-    closesocket(listen_sock);
+    // 종료 시 모든 소켓 닫기
+    for (SOCKET sock : client_sockets) {
+        closesocket(sock);
+    }
     WSACleanup();
     return 0;
 }
+

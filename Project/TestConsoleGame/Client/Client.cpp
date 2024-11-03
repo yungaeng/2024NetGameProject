@@ -8,7 +8,11 @@
 #include <ctime>
 #include <conio.h>
 #include <windows.h>
+#include "..\..\TestConsoleGame\Server\protocol.h"
+#include <mutex>
 using namespace std;
+
+mutex my_lock;
 
 #define SERVERPORT 9000
 #define BUFSIZE    512
@@ -16,8 +20,10 @@ using namespace std;
 const int MAP_SIZE = 12;
 const char EMPTY = '.';
 const char CHARACTER = '@';
+char map[MAP_SIZE][MAP_SIZE];
 
 int characterX, characterY;
+int oldX, oldY;
 
 // 커서 위치 설정 함수
 void setCursorPosition(int x, int y) {
@@ -65,9 +71,8 @@ void updateCharacterPosition(char map[MAP_SIZE][MAP_SIZE], int oldX, int oldY) {
 
 // 캐릭터 이동 함수
 void moveCharacter(char map[MAP_SIZE][MAP_SIZE], char direction, SOCKET sock) {
-    int oldX = characterX;
-    int oldY = characterY;
 
+    // 키 입력에 따른 캐릭터 이동
     switch (direction) {
     case 'w': if (characterY > 0) characterY--; break;
     case 'a': if (characterX > 0) characterX--; break;
@@ -76,26 +81,55 @@ void moveCharacter(char map[MAP_SIZE][MAP_SIZE], char direction, SOCKET sock) {
     default: return;
     }
 
-    // 이전 위치와 새로운 위치를 업데이트
-    map[oldY][oldX] = EMPTY;
-    map[characterY][characterX] = CHARACTER;
-    updateCharacterPosition(map, oldX, oldY);
+    Packet packet;
+    packet.size = sizeof(Packet);
+    packet.type = 1; // 위치 업데이트 타입
+    packet.x = characterX;
+    packet.y = characterY;
 
-    // 새로운 위치를 서버로 전송 (int 형식으로 전송)
-    int position[2] = { characterX, characterY };
-    send(sock, (char*)position, sizeof(position), 0);
+    send(sock, (char*)&packet, sizeof(packet), 0); // 서버에 위치 전송
 }
 
-int main()
-{
+DWORD WINAPI ReceiveThread(LPVOID arg) {
+    SOCKET sock = *(SOCKET*)arg;
+    Packet packet;
+
+    while (true) {
+        int retval = recv(sock, (char*)&packet, sizeof(packet), 0);
+        if (retval > 0) {
+            cout << "수신 패킷 - 크기: " << packet.size
+                << ", 타입: " << packet.type
+                << ", x: " << packet.x
+                << ", y: " << packet.y << endl;
+
+            oldX = characterX; // 이전 위치 저장
+            oldY = characterY;
+
+            // 서버에서 받은 좌표로 캐릭터 위치 이동
+            characterX = packet.x;
+            characterY = packet.y;
+            
+
+            // 화면에 새로운 위치 출력
+            updateCharacterPosition(map, oldX, oldY);
+        }
+        else if (retval == 0 || retval == SOCKET_ERROR) {
+            cout << "서버 연결 종료" << endl;
+            break;
+        }
+    }
+    return 0;
+}
+
+int main() {
     // 윈속 초기화
     WSADATA wsa;
     if (WSAStartup(MAKEWORD(2, 2), &wsa) != 0)
         return 1;
 
     // 소켓 생성
-    SOCKET sock = socket(AF_INET, SOCK_STREAM, 0);
-    if (sock == INVALID_SOCKET)
+    SOCKET client_sock = socket(AF_INET, SOCK_STREAM, 0);
+    if (client_sock == INVALID_SOCKET)
     {
         cout << "소켓 생성 실패" << endl;
         return 1;
@@ -107,17 +141,23 @@ int main()
     serveraddr.sin_family = AF_INET;
     inet_pton(AF_INET, "127.0.0.1", &serveraddr.sin_addr);
     serveraddr.sin_port = htons(SERVERPORT);
-    int retval = connect(sock, (struct sockaddr*)&serveraddr, sizeof(serveraddr));
+    int retval = connect(client_sock, (struct sockaddr*)&serveraddr, sizeof(serveraddr));
     if (retval == SOCKET_ERROR) {
         cout << "Connect 실패, 서버와 연결할 수 없습니다" << endl;
         return 1;
     }
 
     cout << "서버를 찾았습니다" << endl;
+    // Recv스레드 핸들 생성
+    HANDLE hRecvThread = CreateThread(NULL, 0, ReceiveThread, (LPVOID)&client_sock, 0, NULL);
+    if (hRecvThread == NULL) {
+        closesocket(client_sock);
+    }
+    else {
+        CloseHandle(hRecvThread);
+    }
 
-    char map[MAP_SIZE][MAP_SIZE];
-    char input;
-
+    // 초기 맵 출력 및 캐릭터 배치
     initializeMap(map);
     placeCharacter(map);
     printMap(map);
@@ -125,15 +165,13 @@ int main()
     while (true) {
         if (_kbhit()) {
             char input = _getch();
-            if (input == 'q') {
-                break;
-            }
-            moveCharacter(map, input, sock); // sock을 인자로 전달
+            if (input == 'q') break;
+            moveCharacter(map, input, client_sock);
         }
     }
 
-    // 소켓 닫기 및 윈속 종료
-    closesocket(sock);
+    closesocket(client_sock);
     WSACleanup();
     return 0;
 }
+
