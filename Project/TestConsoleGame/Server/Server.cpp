@@ -13,8 +13,8 @@ using namespace std;
 #define BUFSIZE    512
 #define MAP_SIZE    10
 
-SOCKET listen_sock;
-std::vector<SOCKET> client_sockets; // 접속된 모든 클라이언트의 소켓을 관리
+SOCKET server_sock;
+std::vector<SOCKET> Clients; // 접속된 모든 클라이언트의 소켓을 관리
 
 // 서버 초기화 함수
 int Init()
@@ -29,7 +29,7 @@ int Init()
         return 1;
     }
 
-    struct sockaddr_in serveraddr;
+    sockaddr_in serveraddr;
     memset(&serveraddr, 0, sizeof(serveraddr));
     serveraddr.sin_family = AF_INET;
     serveraddr.sin_addr.s_addr = htonl(INADDR_ANY);

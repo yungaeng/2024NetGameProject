@@ -136,7 +136,7 @@ int main() {
     }
 
     // connect()
-    struct sockaddr_in serveraddr;
+    sockaddr_in serveraddr;
     memset(&serveraddr, 0, sizeof(serveraddr));
     serveraddr.sin_family = AF_INET;
     inet_pton(AF_INET, "127.0.0.1", &serveraddr.sin_addr);
