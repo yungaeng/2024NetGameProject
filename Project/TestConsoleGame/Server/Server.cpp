@@ -13,7 +13,7 @@ using namespace std;
 #define BUFSIZE    512
 #define MAP_SIZE    10
 
-SOCKET server_sock;
+SOCKET listen_sock;
 std::vector<SOCKET> Clients; // 접속된 모든 클라이언트의 소켓을 관리
 
 // 서버 초기화 함수
@@ -62,9 +62,9 @@ DWORD WINAPI RecvThread(LPVOID arg) {
     inet_ntop(AF_INET, &clientaddr.sin_addr, addr, sizeof(addr));
     cout << "[TCP 서버] 클라이언트 접속 : IP 주소 = " << addr << ", 포트 번호 = " << ntohs(clientaddr.sin_port) << endl;
 
-    Packet packet;
+    char buf[BUFSIZE];
     while (true) {
-        int retval = recv(client_sock, (char*)&packet, sizeof(packet), 0);
+        int retval = recv(client_sock, (char*)&buf, sizeof(buf), 0);
         if (retval == SOCKET_ERROR) {
             int error_code = WSAGetLastError();
             cout << "recv 실패. 에러 코드: " << error_code << endl;
@@ -76,13 +76,44 @@ DWORD WINAPI RecvThread(LPVOID arg) {
             break;
         }
         if (retval > 0) {
-            cout << "수신 패킷 - 크기: " << packet.size << ", 타입: " << packet.type
-                << ", x: " << packet.x << ", y: " << packet.y << endl;
+            cout << "수신 패킷 - 크기: " << buf[0];
+            switch (buf[1])
+            {
+            case 0:
+            {
+                login_Packet packet;
+                login_Packet* pb= reinterpret_cast<login_Packet*>(buf);
+                
+                packet.size = sizeof(login_Packet);
+                packet.type = 0;
+                packet.id = pb->id;
+                packet.x = pb->x;
+                packet.y = pb->y;
 
-            for (auto& sock : client_sockets) {
-                if (sock != client_sock) { // 송신자에게는 전송하지 않음
+                for (auto& sock : Clients)
+                {
                     send(sock, (char*)&packet, sizeof(packet), 0);
                 }
+                break;
+            }
+            case 1:
+            {
+                move_Packet packet;
+                move_Packet* pb = reinterpret_cast<move_Packet*>(buf);
+
+                packet.size = sizeof(login_Packet);
+                packet.type = 0;
+                packet.x = pb->x;
+                packet.y = pb->y;
+
+                for (auto& sock : Clients)
+                {
+                    send(sock, (char*)&packet, sizeof(packet), 0);
+                }
+                break;
+            }
+            default:
+                break;
             }
         }
     }
@@ -103,7 +134,7 @@ int main() {
 
         client_sock = accept(listen_sock, (struct sockaddr*)&clientaddr, &addrlen);
         if (client_sock != INVALID_SOCKET) {
-            client_sockets.push_back(client_sock);
+            Clients.push_back(client_sock);
             HANDLE hThread = CreateThread(NULL, 0, RecvThread, (LPVOID)client_sock, 0, NULL);
             if (hThread == NULL) {
                 closesocket(client_sock);
@@ -115,7 +146,7 @@ int main() {
     }
 
     // 종료 시 모든 소켓 닫기
-    for (SOCKET sock : client_sockets) {
+    for (SOCKET sock : Clients) {
         closesocket(sock);
     }
     WSACleanup();
