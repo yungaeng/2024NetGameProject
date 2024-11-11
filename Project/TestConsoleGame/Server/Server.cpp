@@ -53,7 +53,8 @@ int InitServer()
 }
 
 // 클라이언트가 접속하면 생성되는 전용 스레드
-DWORD WINAPI WorkerThread(LPVOID arg) {
+DWORD WINAPI WorkerThread(LPVOID arg)
+{
     SOCKET client_sock = (SOCKET)arg;
     struct sockaddr_in clientaddr;
     int addrlen = sizeof(clientaddr);
@@ -82,15 +83,14 @@ DWORD WINAPI WorkerThread(LPVOID arg) {
             case 0:
             {
                 login_Packet packet;
-                login_Packet* pb= reinterpret_cast<login_Packet*>(buf);
-                
+                login_Packet* pb = reinterpret_cast<login_Packet*>(buf);
+
                 packet.size = sizeof(login_Packet);
                 packet.type = 0;
                 packet.id = pb->id;
                 packet.x = pb->x;
                 packet.y = pb->y;
 
-<<<<<<< HEAD
                 for (auto& sock : Clients)
                 {
                     send(sock, (char*)&packet, sizeof(packet), 0);
@@ -115,16 +115,12 @@ DWORD WINAPI WorkerThread(LPVOID arg) {
             }
             default:
                 break;
-=======
-            for (auto& sock : Clients) {
-                send(sock, (char*)&packet, sizeof(packet), 0);
->>>>>>> 5c0a8087a5bad8ac4f99e733cfb065c2a06dc4d4
             }
         }
-    }
 
-    closesocket(client_sock);
-    return 0;
+        closesocket(client_sock);
+        return 0;
+    }
 }
 
 int main()
@@ -133,13 +129,11 @@ int main()
     if (InitServer())
         return -1;
 
-
-<<<<<<< HEAD
-
     if (sizeof(Clients) > 1)
     {
         // 서버 메인 루프
-        while (true) {
+        while (true) 
+        {
             SOCKET client_sock;
             struct sockaddr_in clientaddr;
             int addrlen = sizeof(clientaddr);
@@ -147,39 +141,23 @@ int main()
             client_sock = accept(listen_sock, (struct sockaddr*)&clientaddr, &addrlen);
             if (client_sock != INVALID_SOCKET) {
                 Clients.push_back(client_sock);
-                HANDLE hThread = CreateThread(NULL, 0, RecvThread, (LPVOID)client_sock, 0, NULL);
+                HANDLE hThread = CreateThread(NULL, 0, WorkerThread, (LPVOID)client_sock, 0, NULL);
                 if (hThread == NULL) {
                     closesocket(client_sock);
                 }
                 else {
                     CloseHandle(hThread);
                 }
-=======
-        client_sock = accept(listen_sock, (struct sockaddr*)&clientaddr, &addrlen);
-        if (client_sock != INVALID_SOCKET) {
-            Clients.push_back(client_sock);
-            HANDLE hThread = CreateThread(NULL, 0, RecvThread, (LPVOID)client_sock, 0, NULL);
-            if (hThread == NULL) {
-                closesocket(client_sock);
-            }
-            else {
-                CloseHandle(hThread);
->>>>>>> 5c0a8087a5bad8ac4f99e733cfb065c2a06dc4d4
             }
         }
-
-<<<<<<< HEAD
-        // 종료 시 모든 소켓 닫기
-        for (SOCKET sock : Clients) {
-            closesocket(sock);
-        }
-        WSACleanup();
-        return 0;
-=======
-    // 종료 시 모든 소켓 닫기
-    for (SOCKET sock : Clients) {
-        closesocket(sock);
->>>>>>> 5c0a8087a5bad8ac4f99e733cfb065c2a06dc4d4
     }
+    // 종료 시 모든 소켓 닫기
+    for (SOCKET sock : Clients)
+    {
+        closesocket(sock);
+    }
+
+    WSACleanup();
+    return 0;
 }
 
