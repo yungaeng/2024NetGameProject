@@ -16,8 +16,8 @@ using namespace std;
 SOCKET listen_sock;
 std::vector<SOCKET> Clients; // 접속된 모든 클라이언트의 소켓을 관리
 
-// 서버 초기화 함수
-int Init()
+// 서버 초기화 함수 (성공)
+int InitServer()
 {
     WSADATA wsa;
     if (WSAStartup(MAKEWORD(2, 2), &wsa) != 0)
@@ -52,8 +52,8 @@ int Init()
     }
 }
 
-// 클라이언트로부터 위치 정보를 수신하는 스레드
-DWORD WINAPI RecvThread(LPVOID arg) {
+// 클라이언트가 접속하면 생성되는 전용 스레드
+DWORD WINAPI WorkerThread(LPVOID arg) {
     SOCKET client_sock = (SOCKET)arg;
     struct sockaddr_in clientaddr;
     int addrlen = sizeof(clientaddr);
@@ -90,6 +90,7 @@ DWORD WINAPI RecvThread(LPVOID arg) {
                 packet.x = pb->x;
                 packet.y = pb->y;
 
+<<<<<<< HEAD
                 for (auto& sock : Clients)
                 {
                     send(sock, (char*)&packet, sizeof(packet), 0);
@@ -114,6 +115,10 @@ DWORD WINAPI RecvThread(LPVOID arg) {
             }
             default:
                 break;
+=======
+            for (auto& sock : Clients) {
+                send(sock, (char*)&packet, sizeof(packet), 0);
+>>>>>>> 5c0a8087a5bad8ac4f99e733cfb065c2a06dc4d4
             }
         }
     }
@@ -122,16 +127,34 @@ DWORD WINAPI RecvThread(LPVOID arg) {
     return 0;
 }
 
-
-int main() {
-    if (Init())
+int main()
+{
+    // 서버 초기화
+    if (InitServer())
         return -1;
 
-    while (true) {
-        SOCKET client_sock;
-        struct sockaddr_in clientaddr;
-        int addrlen = sizeof(clientaddr);
 
+<<<<<<< HEAD
+
+    if (sizeof(Clients) > 1)
+    {
+        // 서버 메인 루프
+        while (true) {
+            SOCKET client_sock;
+            struct sockaddr_in clientaddr;
+            int addrlen = sizeof(clientaddr);
+
+            client_sock = accept(listen_sock, (struct sockaddr*)&clientaddr, &addrlen);
+            if (client_sock != INVALID_SOCKET) {
+                Clients.push_back(client_sock);
+                HANDLE hThread = CreateThread(NULL, 0, RecvThread, (LPVOID)client_sock, 0, NULL);
+                if (hThread == NULL) {
+                    closesocket(client_sock);
+                }
+                else {
+                    CloseHandle(hThread);
+                }
+=======
         client_sock = accept(listen_sock, (struct sockaddr*)&clientaddr, &addrlen);
         if (client_sock != INVALID_SOCKET) {
             Clients.push_back(client_sock);
@@ -141,15 +164,22 @@ int main() {
             }
             else {
                 CloseHandle(hThread);
+>>>>>>> 5c0a8087a5bad8ac4f99e733cfb065c2a06dc4d4
             }
         }
-    }
 
+<<<<<<< HEAD
+        // 종료 시 모든 소켓 닫기
+        for (SOCKET sock : Clients) {
+            closesocket(sock);
+        }
+        WSACleanup();
+        return 0;
+=======
     // 종료 시 모든 소켓 닫기
     for (SOCKET sock : Clients) {
         closesocket(sock);
+>>>>>>> 5c0a8087a5bad8ac4f99e733cfb065c2a06dc4d4
     }
-    WSACleanup();
-    return 0;
 }
 

@@ -131,12 +131,19 @@ DWORD WINAPI ReceiveThread(LPVOID arg) {
     while (true) {
         int retval = recv(sock, (char*)&packet, sizeof(packet), 0);
         if (retval > 0) {
+<<<<<<< HEAD
             if (packet[1] == 1) {  // 움직임 업데이트
                 // 기존 캐릭터 위치 업데이트 로직
                 // ...
             }
             else if (packet[1] == 0) {  // 로그인 패킷 수신 시
                 login_Packet* lp = reinterpret_cast<login_Packet*>(packet);
+=======
+          /*  cout << "수신 패킷 - 크기: " << packet.size
+                << ", 타입: " << packet.type
+                << ", x: " << packet.x
+                << ", y: " << packet.y << endl;*/
+>>>>>>> 5c0a8087a5bad8ac4f99e733cfb065c2a06dc4d4
 
                 character othercharacter;
                 othercharacter.charactertype = OTHERCTER;
@@ -145,10 +152,19 @@ DWORD WINAPI ReceiveThread(LPVOID arg) {
                 othercharacter.oldX = lp->x;
                 othercharacter.oldY = lp->y;
 
+<<<<<<< HEAD
                 characters.push_back(othercharacter);  // othercharacter 추가
 
                 printMap(map);  // 화면에 새로운 캐릭터 포함해 다시 출력
             }
+=======
+            // 서버에서 받은 좌표로 캐릭터 위치 이동
+            characterX = packet.x;
+            characterY = packet.y;
+            
+            // 화면에 새로운 위치 출력
+            updateCharacterPosition(map, oldX, oldY);
+>>>>>>> 5c0a8087a5bad8ac4f99e733cfb065c2a06dc4d4
         }
         else if (retval == 0 || retval == SOCKET_ERROR) {
             cout << "서버 연결 종료" << endl;
