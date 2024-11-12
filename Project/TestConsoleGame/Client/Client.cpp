@@ -14,7 +14,7 @@ using namespace std;
 #define SERVERPORT 9000
 #define BUFSIZE    512
 
-const int MAP_SIZE = 12;
+const int MAP_SIZE = 20;
 const char EMPTY = '.';
 const char CHARACTER = '@';
 const char OTHERCTER = '0';
@@ -22,6 +22,7 @@ char map[MAP_SIZE][MAP_SIZE];
 
 struct character {
     char charactertype;
+    int id;
     int characterX, characterY;
     int oldX, oldY;
 };
@@ -113,9 +114,11 @@ void moveCharacter(character& ch, char direction, SOCKET sock) {
     default: return;
     }
 
-    move_Packet packet;
-    packet.size = sizeof(move_Packet);
-    packet.type = 1; // 위치 업데이트 타입
+    Packet packet;
+    packet.size = sizeof(Packet);
+    packet.type = MOVE; // 위치 업데이트 타입
+    packet.id = ch.id;
+    packet.key = direction;
     packet.x = ch.characterX;
     packet.y = ch.characterY;
 
@@ -131,36 +134,7 @@ DWORD WINAPI ReceiveThread(LPVOID arg) {
     while (true) {
         int retval = recv(sock, (char*)&packet, sizeof(packet), 0);
         if (retval > 0) {
-            if (packet[1] == 1) {  // 움직임 업데이트
-                // 기존 캐릭터 위치 업데이트 로직
-                // ...
-            }
-            else if (packet[1] == 0) {  // 로그인 패킷 수신 시
-                login_Packet* lp = reinterpret_cast<login_Packet*>(packet);
-
-          /*  cout << "수신 패킷 - 크기: " << packet.size
-                << ", 타입: " << packet.type
-                << ", x: " << packet.x
-                << ", y: " << packet.y << endl;*/
-
-                character othercharacter;
-                othercharacter.charactertype = OTHERCTER;
-                othercharacter.characterX = lp->x;
-                othercharacter.characterY = lp->y;
-                othercharacter.oldX = lp->x;
-                othercharacter.oldY = lp->y;
-
-                characters.push_back(othercharacter);  // othercharacter 추가
-
-                printMap(map);  // 화면에 새로운 캐릭터 포함해 다시 출력
-            }
-
-            // 서버에서 받은 좌표로 캐릭터 위치 이동
-            characterX = packet.x;
-            characterY = packet.y;
             
-            // 화면에 새로운 위치 출력
-            updateCharacterPosition(map, oldX, oldY);
         }
         else if (retval == 0 || retval == SOCKET_ERROR) {
             cout << "서버 연결 종료" << endl;
@@ -191,7 +165,7 @@ int main() {
         cout << "Connect 실패, 서버와 연결할 수 없습니다" << endl;
         return 1;
     }
-
+    
     cout << "서버를 찾았습니다" << endl;
 
     HANDLE hRecvThread = CreateThread(NULL, 0, ReceiveThread, (LPVOID)&client_sock, 0, NULL);

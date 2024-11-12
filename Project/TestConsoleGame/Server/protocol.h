@@ -1,17 +1,14 @@
 #pragma once
-
-#pragma pack(push, 1)
-struct move_Packet {
-    char size;
-    char type;
-    int x;
-    int y;
+enum PTYPE
+{
+    LOGIN, MOVE
 };
 
-struct login_Packet {
+struct Packet {
     char size;
     char type;
     int id;
+    char key;
     int x;
     int y;
 };

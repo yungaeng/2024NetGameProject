@@ -76,51 +76,32 @@ DWORD WINAPI WorkerThread(LPVOID arg)
             cout << "[TCP 서버] 클라이언트 연결 종료" << endl;
             break;
         }
-        if (retval > 0) {
-            cout << "수신 패킷 - 크기: " << buf[0];
-            switch (buf[1])
-            {
-            case 0:
-            {
-                login_Packet packet;
-                login_Packet* pb = reinterpret_cast<login_Packet*>(buf);
+        else
+        {
+            Packet packet;
+            Packet* pb = reinterpret_cast<Packet*>(buf);
 
-                packet.size = sizeof(login_Packet);
-                packet.type = 0;
-                packet.id = pb->id;
-                packet.x = pb->x;
-                packet.y = pb->y;
+            packet.size = sizeof(Packet);
+            packet.type = 0;
+            packet.id = pb->id;
+            packet.key = pb->key;
+            packet.x = pb->x;
+            packet.y = pb->y;
 
-                for (auto& sock : Clients)
-                {
-                    send(sock, (char*)&packet, sizeof(packet), 0);
-                }
-                break;
-            }
-            case 1:
-            {
-                move_Packet packet;
-                move_Packet* pb = reinterpret_cast<move_Packet*>(buf);
+            for (auto& sock : Clients)
+                send(sock, (char*)&packet, sizeof(packet), 0);
 
-                packet.size = sizeof(login_Packet);
-                packet.type = 0;
-                packet.x = pb->x;
-                packet.y = pb->y;
-
-                for (auto& sock : Clients)
-                {
-                    send(sock, (char*)&packet, sizeof(packet), 0);
-                }
-                break;
-            }
-            default:
-                break;
-            }
+            cout << "수신 패킷 - 크기: " << packet.size << endl;
+            cout << "수신 패킷 - 타입: " << packet.type << endl;
+            cout << "수신 패킷 - id: " << packet.id << endl;
+            cout << "수신 패킷 - key: " << packet.key << endl;
+            cout << "수신 패킷 - x: " << packet.x << endl;
+            cout << "수신 패킷 - y: " << packet.y << endl;
+            break;
         }
-
-        closesocket(client_sock);
-        return 0;
     }
+    closesocket(client_sock);
+    return 0;
 }
 
 int main()
@@ -141,13 +122,7 @@ int main()
             client_sock = accept(listen_sock, (struct sockaddr*)&clientaddr, &addrlen);
             if (client_sock != INVALID_SOCKET) {
                 Clients.push_back(client_sock);
-                HANDLE hThread = CreateThread(NULL, 0, WorkerThread, (LPVOID)client_sock, 0, NULL);
-                if (hThread == NULL) {
-                    closesocket(client_sock);
-                }
-                else {
-                    CloseHandle(hThread);
-                }
+                CreateThread(NULL, 0, WorkerThread, (LPVOID)client_sock, 0, NULL);
             }
         }
     }
