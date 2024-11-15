@@ -114,9 +114,11 @@ void moveCharacter(character& ch, char direction, SOCKET sock) {
     packet.size = sizeof(Packet);
     packet.type = MOVE; // 위치 업데이트 타입
     packet.id = ch.id;
-    packet.key = direction;
+    packet.character = direction;
     packet.x = ch.characterX;
     packet.y = ch.characterY;
+    packet.old_x = ch.oldX;
+    packet.old_y = ch.oldY;
 
     send(sock, (char*)&packet, sizeof(packet), 0); // 서버에 위치 전송
 }
@@ -128,9 +130,9 @@ DWORD WINAPI ReceiveThread(LPVOID arg) {
     while (true) {
         int retval = recv(sock, (char*)&packet, sizeof(packet), 0);
         if (retval > 0) {
-            Packet* p = reinterpret_cast<Packet*>(packet);
-            CHARACTER ch;
-            updateCharacterPosition(ch);
+           
+            //updateCharacterPosition(ch);
+            break;
         }
         else if (retval == 0 || retval == SOCKET_ERROR) {
             cout << "서버 연결 종료" << endl;
@@ -179,7 +181,8 @@ int main() {
     while (true) {
         if (_kbhit()) {
             char input = _getch();
-            if (input == 'q') break;
+            if (input == 'q')
+                break;
             moveCharacter(characters[0], input, client_sock); // 첫 번째 캐릭터 이동
         }
     }

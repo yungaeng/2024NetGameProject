@@ -72,7 +72,7 @@ DWORD WINAPI WorkerThread(LPVOID arg)
             cout << "[TCP 서버] 클라이언트 연결 종료" << endl;
             break;
         }
-        else
+        else if (retval > 0)
         {
             Packet packet;
             Packet* pb = reinterpret_cast<Packet*>(buf);
@@ -80,19 +80,19 @@ DWORD WINAPI WorkerThread(LPVOID arg)
             packet.size = sizeof(Packet);
             packet.type = 0;
             packet.id = pb->id;
-            packet.key = pb->key;
+            packet.character = pb->character;
             packet.x = pb->x;
             packet.y = pb->y;
 
             for (auto& sock : Clients)
                 send(sock, (char*)&packet, sizeof(packet), 0);
 
-            cout << "수신 패킷 - 크기: " << packet.size << endl;
-            cout << "수신 패킷 - 타입: " << packet.type << endl;
-            cout << "수신 패킷 - id: " << packet.id << endl;
-            cout << "수신 패킷 - key: " << packet.key << endl;
-            cout << "수신 패킷 - x: " << packet.x << endl;
-            cout << "수신 패킷 - y: " << packet.y << endl;
+            cout << "수신 패킷 - 크기: " << pb->size << endl;
+            cout << "수신 패킷 - 타입: " << pb->type << endl;
+            cout << "수신 패킷 - id: " << pb->id << endl;
+            cout << "수신 패킷 - key: " << pb->character << endl;
+            cout << "수신 패킷 - x: " << pb->x << endl;
+            cout << "수신 패킷 - y: " << pb->y << endl;
             break;
         }
     }
@@ -117,8 +117,14 @@ int main()
 
             client_sock = accept(listen_sock, (struct sockaddr*)&clientaddr, &addrlen);
             if (client_sock != INVALID_SOCKET) {
-                Clients.push_back(client_sock);
-                CreateThread(NULL, 0, WorkerThread, (LPVOID)client_sock, 0, NULL);
+                Clients.emplace_back(client_sock);
+                HANDLE hWorkerThread = CreateThread(NULL, 0, WorkerThread, (LPVOID)client_sock, 0, NULL);
+                if (hWorkerThread == NULL) {
+                    closesocket(client_sock);
+                }
+                else {
+                    CloseHandle(hWorkerThread);
+                }
             }
         }
     }

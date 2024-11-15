@@ -12,8 +12,11 @@ struct Packet {
     char size;
     char type;
     int id;
-    char key;
+    char character;
     int x;
     int y;
+    int old_x;
+    int old_y;
 };
+
 #pragma pack(pop)
