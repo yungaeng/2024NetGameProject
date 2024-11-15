@@ -7,14 +7,10 @@
 #include <ctime>
 #include <conio.h>
 #include <windows.h>
-#include "..\..\TestConsoleGame\Server\protocol.h"
+#include "..\..\TestConsoleGame\Server\Packet.h"
 #include <vector>
 using namespace std;
 
-#define SERVERPORT 9000
-#define BUFSIZE    512
-
-const int MAP_SIZE = 20;
 const char EMPTY = '.';
 const char CHARACTER = '@';
 const char OTHERCTER = '0';
@@ -123,8 +119,6 @@ void moveCharacter(character& ch, char direction, SOCKET sock) {
     packet.y = ch.characterY;
 
     send(sock, (char*)&packet, sizeof(packet), 0); // 서버에 위치 전송
-
-    updateCharacterPosition(ch);
 }
 
 // 수신 스레드 함수
@@ -134,7 +128,9 @@ DWORD WINAPI ReceiveThread(LPVOID arg) {
     while (true) {
         int retval = recv(sock, (char*)&packet, sizeof(packet), 0);
         if (retval > 0) {
-            
+            Packet* p = reinterpret_cast<Packet*>(packet);
+            CHARACTER ch;
+            updateCharacterPosition(ch);
         }
         else if (retval == 0 || retval == SOCKET_ERROR) {
             cout << "서버 연결 종료" << endl;

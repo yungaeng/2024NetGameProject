@@ -5,13 +5,9 @@
 #include <iostream>
 #include <queue>
 #include <mutex>
-#include "protocol.h"
+#include "Packet.h"
 
 using namespace std;
-
-#define SERVERPORT 9000
-#define BUFSIZE    512
-#define MAP_SIZE    10
 
 SOCKET listen_sock;
 std::vector<SOCKET> Clients; // 立加等 葛电 努扼捞攫飘狼 家南阑 包府

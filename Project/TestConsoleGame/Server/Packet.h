@@ -1,3 +1,7 @@
+#define SERVERPORT 9000
+#define BUFSIZE    512
+#define MAP_SIZE    10
+
 #pragma once
 enum PTYPE
 {
