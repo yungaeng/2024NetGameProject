@@ -1,29 +1,20 @@
-#pragma comment(lib, "ws2_32") // ws2_32.lib 링크
-
-#include <winsock2.h>
-#include <ws2tcpip.h>
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
 #include <conio.h>
 #include <windows.h>
-#include "..\..\TestConsoleGame\Server\Packet.h"
-#include <vector>
+
 using namespace std;
 
+const int MAP_SIZE = 12;
 const char EMPTY = '.';
-const char CHARACTER = '@';
-const char OTHERCTER = '0';
-char map[MAP_SIZE][MAP_SIZE];
 
-struct character {
-    char charactertype;
-    int id;
+struct character
+{
     int characterX, characterY;
-    int oldX, oldY;
+    int id;
+    char CharType;
 };
-
-vector<character> characters;
 
 // 커서 위치 설정 함수
 void setCursorPosition(int x, int y) {
@@ -41,41 +32,17 @@ void initializeMap(char map[MAP_SIZE][MAP_SIZE]) {
     }
 }
 
-// 캐릭터를 무작위 위치에 배치하고 벡터에 추가
-void placeCharacter(char map[MAP_SIZE][MAP_SIZE], char type) {
-    character newChar;
-    newChar.charactertype = type;
-
-    // 무작위 위치를 찾을 때까지 반복
-    do {
-        newChar.characterX = rand() % MAP_SIZE;
-        newChar.characterY = rand() % MAP_SIZE;
-    } while (map[newChar.characterY][newChar.characterX] != EMPTY);
-
-    newChar.oldX = newChar.characterX;
-    newChar.oldY = newChar.characterY;
-    characters.push_back(newChar);
-
-    map[newChar.characterY][newChar.characterX] = newChar.charactertype;
+// 캐릭터를 무작위 위치에 배치
+void placeCharacter(char map[MAP_SIZE][MAP_SIZE], character ch) {
+    srand(static_cast<unsigned int>(time(0)));
+    ch.characterX = rand() % MAP_SIZE;
+    ch.characterY = rand() % MAP_SIZE;
+    map[ch.characterY][ch.characterX] = ch.CharType;
 }
 
 // 맵을 처음 한 번만 그리는 함수
 void printMap(char map[MAP_SIZE][MAP_SIZE]) {
-    setCursorPosition(0, 0);
-
-    // 맵 초기화
-    for (int i = 0; i < MAP_SIZE; ++i) {
-        for (int j = 0; j < MAP_SIZE; ++j) {
-            map[i][j] = EMPTY;
-        }
-    }
-
-    // 각 캐릭터의 위치를 맵에 표시
-    for (const auto& ch : characters) {
-        map[ch.characterY][ch.characterX] = ch.charactertype;
-    }
-
-    // 맵 출력
+    setCursorPosition(0, 0);  // 화면의 맨 위로 커서 이동
     for (int i = 0; i < MAP_SIZE; ++i) {
         for (int j = 0; j < MAP_SIZE; ++j) {
             cout << map[i][j] << ' ';
@@ -85,109 +52,54 @@ void printMap(char map[MAP_SIZE][MAP_SIZE]) {
 }
 
 // 캐릭터 위치 업데이트 함수
-void updateCharacterPosition(character& ch) {
-    setCursorPosition(ch.oldX * 2, ch.oldY);
-    cout << EMPTY;
+void updateCharacterPosition(char map[MAP_SIZE][MAP_SIZE], character ch, int oldX, int oldY) {
+    setCursorPosition(oldX * 2, oldY);
+    cout << EMPTY;  // 이전 캐릭터 위치를 지움
 
     setCursorPosition(ch.characterX * 2, ch.characterY);
-    cout << ch.charactertype;
-
-    ch.oldX = ch.characterX;
-    ch.oldY = ch.characterY;
+    cout << ch.CharType;  // 새로운 캐릭터 위치 출력
 }
 
 // 캐릭터 이동 함수
-void moveCharacter(character& ch, char direction, SOCKET sock) {
-    ch.oldX = ch.characterX;
-    ch.oldY = ch.characterY;
+void moveCharacter(char map[MAP_SIZE][MAP_SIZE], character ch, char direction) {
+    int oldX = ch.characterX;
+    int oldY = ch.characterY;
 
-    // 키 입력에 따른 캐릭터 이동
     switch (direction) {
     case 'w': if (ch.characterY > 0) ch.characterY--; break;
     case 'a': if (ch.characterX > 0) ch.characterX--; break;
     case 's': if (ch.characterY < MAP_SIZE - 1) ch.characterY++; break;
     case 'd': if (ch.characterX < MAP_SIZE - 1) ch.characterX++; break;
-    default: return;
+    default: return;  // 유효하지 않은 입력
     }
 
-    Packet packet;
-    packet.size = sizeof(Packet);
-    packet.type = MOVE; // 위치 업데이트 타입
-    packet.id = ch.id;
-    packet.character = direction;
-    packet.x = ch.characterX;
-    packet.y = ch.characterY;
-    packet.old_x = ch.oldX;
-    packet.old_y = ch.oldY;
-
-    send(sock, (char*)&packet, sizeof(packet), 0); // 서버에 위치 전송
-}
-
-// 수신 스레드 함수
-DWORD WINAPI ReceiveThread(LPVOID arg) {
-    SOCKET sock = *(SOCKET*)arg;
-    char packet[BUFSIZE];
-    while (true) {
-        int retval = recv(sock, (char*)&packet, sizeof(packet), 0);
-        if (retval > 0) {
-           
-            //updateCharacterPosition(ch);
-            break;
-        }
-        else if (retval == 0 || retval == SOCKET_ERROR) {
-            cout << "서버 연결 종료" << endl;
-            break;
-        }
-    }
-    return 0;
+    // 이전 위치와 새로운 위치를 업데이트
+    map[oldY][oldX] = EMPTY;
+    map[ch.characterY][ch.characterX] = ch.CharType;
+    updateCharacterPosition(map, ch, oldX, oldY);
 }
 
 int main() {
-    WSADATA wsa;
-    if (WSAStartup(MAKEWORD(2, 2), &wsa) != 0)
-        return 1;
-
-    SOCKET client_sock = socket(AF_INET, SOCK_STREAM, 0);
-    if (client_sock == INVALID_SOCKET) {
-        cout << "소켓 생성 실패" << endl;
-        return 1;
-    }
-
-    sockaddr_in serveraddr;
-    memset(&serveraddr, 0, sizeof(serveraddr));
-    serveraddr.sin_family = AF_INET;
-    inet_pton(AF_INET, "127.0.0.1", &serveraddr.sin_addr);
-    serveraddr.sin_port = htons(SERVERPORT);
-    int retval = connect(client_sock, (struct sockaddr*)&serveraddr, sizeof(serveraddr));
-    if (retval == SOCKET_ERROR) {
-        cout << "Connect 실패, 서버와 연결할 수 없습니다" << endl;
-        return 1;
-    }
+    char map[MAP_SIZE][MAP_SIZE];
+    char input;
     
-    cout << "서버를 찾았습니다" << endl;
-
-    HANDLE hRecvThread = CreateThread(NULL, 0, ReceiveThread, (LPVOID)&client_sock, 0, NULL);
-    if (hRecvThread == NULL) {
-        closesocket(client_sock);
-    }
-    else {
-        CloseHandle(hRecvThread);
-    }
+    character ch{ 0,0,0,'@' };
 
     initializeMap(map);
-    placeCharacter(map, CHARACTER);  // 캐릭터 배치
+    placeCharacter(map, ch);
     printMap(map);
 
     while (true) {
-        if (_kbhit()) {
-            char input = _getch();
-            if (input == 'q')
+        if (_kbhit()) {  // 키 입력이 있는지 확인
+            input = _getch();
+            if (input == 'q') {
                 break;
-            moveCharacter(characters[0], input, client_sock); // 첫 번째 캐릭터 이동
+            }
+            moveCharacter(map, ch, input);
         }
     }
 
-    closesocket(client_sock);
-    WSACleanup();
+    setCursorPosition(0, MAP_SIZE + 1);  // 게임 종료 메시지 위치 조정
+    cout << "Game Over!\n";
     return 0;
 }

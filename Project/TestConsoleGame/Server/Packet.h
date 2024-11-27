@@ -11,12 +11,7 @@ enum PTYPE
 struct Packet {
     char size;
     char type;
-    int id;
-    char character;
-    int x;
-    int y;
-    int old_x;
-    int old_y;
+    char data[510];
 };
 
 #pragma pack(pop)

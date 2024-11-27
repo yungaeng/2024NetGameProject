@@ -5,7 +5,7 @@
 #include <iostream>
 #include <queue>
 #include <mutex>
-#include "Packet.h"
+#include "..\..\game\Windows-main\Packet.h"
 
 using namespace std;
 
@@ -82,10 +82,12 @@ DWORD WINAPI WorkerThread(LPVOID arg)
 
             p.size = pp->size;
             p.type = pp->type;
-            p.data = pp->data;
+            memcpy_s(&p.gsp, p.size, &pp->gsp, pp->size);
 
             for (auto& sock : Clients)
                 send(sock, (char*)&p, sizeof(datasize), 0);
+
+            cout << "data recv and send!!" << endl;
         }
     }
     closesocket(client_sock);
@@ -101,7 +103,7 @@ int main()
     if (sizeof(Clients) > 1)
     {
         // 서버 메인 루프
-        while (true) 
+        while (true)
         {
             SOCKET client_sock;
             struct sockaddr_in clientaddr;
@@ -129,4 +131,3 @@ int main()
     WSACleanup();
     return 0;
 }
-

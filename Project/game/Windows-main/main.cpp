@@ -2,11 +2,17 @@
 #define window_size_d 650
 #define _CRT_SECURE_NO_WARNINGS
 
+#pragma comment(lib, "ws2_32")
+
+#include <winsock2.h>
+#include <ws2tcpip.h>
+#include <thread>
+#include "Packet.h"
+#include <mutex>
+
 #include <windows.h>
 
-#include <mmsystem.h>
-#include <stdlib.h>
-#include <stdio.h>
+#include <iostream>
 #include <tchar.h>
 #include <ctype.h>
 #include <time.h>
@@ -14,14 +20,39 @@
 #include "resource.h"
 #pragma comment(lib, "winmm.lib")
 
-typedef struct box {
-	int left, top, right, bottom;
-} box;
+//typedef struct box {
+//	int left, top, right, bottom;
+//} box;
 
 int map_kind = 1, fst_char_kind = 1, sec_char_kind = 1;
 
-int collision(box A, box B);
-int collision(box A, box B)
+//typedef struct BAKCGROUND {
+//	int MAX_X, MAX_Y, kind;
+//}background;
+//typedef struct CHARACTER {
+//	int x, y, state, kind, diff;
+//	int speed, num_bubble, bubble_len;
+//}Character;
+//typedef struct BUBBLE {
+//	int x, y, len, time, on, pop;
+//}Bubble;
+//typedef struct OBJECT {
+//	int x, y, kind, random_block;
+//}Object;
+//typedef struct ITEM {
+//	int kind, on;
+//}Item;
+
+SOCKET client_socket;
+bool is_connected = true;
+std::mutex mylock;
+
+static Object obj[13][15];
+static Character character[2];
+static Bubble bubble[14];
+static Item item[13][15];
+
+static int collision(RECT A, RECT B)
 {
 	if (A.left >= B.left && A.left < B.right && A.top < B.bottom && A.bottom > B.top) // left
 		return 1;
@@ -34,11 +65,104 @@ int collision(box A, box B)
 	return 0;
 }
 
-void break_block();
-void break_block()
-{
-
+void send_packet(SOCKET client_socket, const GameStatePacket& packet) {
+	send(client_socket, reinterpret_cast<const char*>(&packet), sizeof(packet), 0);
 }
+
+static void recv_thread() {
+	while (is_connected) {
+		char buf[sizeof(GameStatePacket)];
+		int ret = recv(client_socket, buf, sizeof(buf), 0);
+		if (ret > 0) {
+			GameStatePacket* packet = reinterpret_cast<GameStatePacket*>(buf);
+
+			// 수신한 데이터로 게임 상태 갱신
+			for (int i = 0; i < 2; ++i) {
+				character[i].x = packet->players[i].x;
+				character[i].y = packet->players[i].y;
+				character[i].state = packet->players[i].state;
+				character[i].diff = packet->players[i].diff;
+			}
+
+			// 아이템과 버블 갱신
+			for (int y = 0; y < 13; y++)
+				for (int x = 0; x < 15; x++)
+				{
+					item[y][x].kind = packet->items[y][x].kind;
+					item[y][x].on = packet->items[y][x].on;
+				}
+			for (int i = 0; i < 14; ++i) {
+				
+					bubble[i].x = packet->bubbles[i].x;
+					bubble[i].y = packet->bubbles[i].y;
+					bubble[i].len = packet->bubbles[i].len;
+					bubble[i].time = packet->bubbles[i].time;
+					bubble[i].on = packet->bubbles[i].on;
+					bubble[i].pop = packet->bubbles[i].pop;
+			}
+
+			for (int y = 0; y < 13; y++)
+				for (int x = 0; x < 15; x++)
+				{
+					obj[y][x].x = packet->object[y][x].x;
+					obj[y][x].y = packet->object[y][x].y;
+					obj[y][x].kind = packet->object[y][x].kind ;
+					obj[y][x].random_block = packet->object[y][x].random_block;
+				}
+		}
+		else {
+			std::cerr << "연결에 실패했습니다." << std::endl;
+			is_connected = false;
+			closesocket(client_socket);
+		}
+	}
+}
+
+void update_and_send() {
+	GameStatePacket packet = {};
+	mylock.lock();
+	for (int y = 0; y < 13; y++)
+		for (int x = 0; x < 15; x++)
+		{
+			packet.object[y][x].x = obj[y][x].x;
+			packet.object[y][x].y = obj[y][x].y;
+			packet.object[y][x].kind = obj[y][x].kind;
+			packet.object[y][x].random_block = obj[y][x].random_block;
+		}
+
+	// 현재 플레이어 상태 업데이트
+	for (int i = 0; i < 2; ++i) {
+		packet.players[i].x = character[i].x;
+		packet.players[i].y = character[i].y;
+		packet.players[i].state = character[i].state;
+		packet.players[i].diff = character[i].diff;
+	}
+
+	// 아이템 상태 업데이트
+	for (int y = 0; y < 13; ++y) {
+		for (int x = 0; x < 15; ++x) {
+			if (item[y][x].on) {
+				packet.items[y][x].kind = item[y][x].kind;
+			}
+		}
+	}
+
+	// 버블 상태 업데이트
+	for (int i = 0; i < 14; ++i) {
+		if (bubble[i].on) {
+			packet.bubbles[i].x = bubble[i].x;
+			packet.bubbles[i].y = bubble[i].y;
+			packet.bubbles[i].len = bubble[i].len;
+			packet.bubbles[i].time = bubble[i].time;
+			packet.bubbles[i].on = bubble[i].on;
+			packet.bubbles[i].pop = bubble[i].pop;
+		}
+	}
+
+	send_packet(client_socket, packet);
+	mylock.unlock();
+}
+
 
 HINSTANCE g_hInst;
 LPCTSTR lpszClass = L"Window Class Name";
@@ -49,6 +173,33 @@ BOOL CALLBACK Dlalog_Proc(HWND, UINT, WPARAM, LPARAM);
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdParam, int nCmdShow)
 {
+	WSADATA wsaData;
+	if (WSAStartup(MAKEWORD(2, 2), &wsaData))
+		return -1;
+
+	client_socket = socket(AF_INET, SOCK_STREAM, 0);
+
+	SOCKADDR_IN server_addr;
+	memset(&server_addr, 0, sizeof(server_addr));
+	server_addr.sin_family = AF_INET;
+	server_addr.sin_port = htons(SERVERPORT);
+	inet_pton(AF_INET, "127.0.0.1", &server_addr.sin_addr);
+
+	if (connect(client_socket, reinterpret_cast<sockaddr*>(&server_addr), sizeof(server_addr)) == SOCKET_ERROR)
+	{
+		std::cerr << "연결이 끊겼습니다." << std::endl;
+		is_connected = false;
+		closesocket(client_socket);
+		WSACleanup();
+		return -1;
+	}
+
+	// 이후 서버와 연결 됨
+	std::cerr << "서버를 찾았습니다!!" << std::endl;
+
+	// 수신 루프
+	std::thread recvThread(recv_thread);
+
 	HWND hWnd;
 	MSG Message;
 	WNDCLASSEX WndClass;
@@ -72,8 +223,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdPa
 	RegisterClassEx(&WndClass);
 	hWnd = CreateWindow(lpszClass, lpszWindowName, WS_OVERLAPPEDWINDOW, 100, 100, window_size_w, window_size_d, NULL, (HMENU)NULL, hInstance, NULL);
 	
-	box stWindowRect; GetWindowRect(hWnd, &stWindowRect);
-	box stClientRect; GetClientRect(hWnd, &stClientRect);
+	RECT stWindowRect; GetWindowRect(hWnd, &stWindowRect);
+	RECT stClientRect; GetClientRect(hWnd, &stClientRect);
 	int nClientWidth = stClientRect.right - stClientRect.left;
 	int nClientHeight = stClientRect.bottom - stClientRect.top;
 	int nWindowWidth = stWindowRect.right - stWindowRect.left;
@@ -83,7 +234,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdPa
 	nWindowHeight += nWindowHeight - nClientHeight;
 	int nResolutionX = GetSystemMetrics(SM_CXSCREEN);
 	int nResolutionY = GetSystemMetrics(SM_CYSCREEN);
-	box window = { 0,0,800,800 };
+	RECT window = { 0,0,800,800 };
 	AdjustWindowRect(&window, WS_OVERLAPPEDWINDOW, FALSE);
 	SetWindowPos(hWnd, NULL, nResolutionX / 2 - nWindowWidth / 2, nResolutionY / 2 - nWindowHeight / 2, nWindowWidth, nWindowHeight, NULL);
 
@@ -97,23 +248,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdPa
 	return Message.wParam;
 }
 
-typedef struct BAKCGROUND {
-	int MAX_X, MAX_Y, kind;
-}background;
-typedef struct CHARACTER {
-	int x, y, state, kind, diff;
-	int speed, num_bubble, bubble_len;
-}Character;
-typedef struct BUBBLE {
-	int x, y, len, time, on, pop;
-}Bubble;
-typedef struct OBJECT {
-	int x, y, kind, random_block;
-}Object;
-typedef struct ITEM {
-	int kind, on;
-}Item;
-
 LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	PAINTSTRUCT ps;
@@ -125,15 +259,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	static int bubble_num[2] = { 0,0 }, count1 = 0, count2 = 0, movementA = 0, movementB = 0, Bubble_move = 0, playtime = 0, Ascore = 0, Bscore = 0;
 	static int x = 0, y = 0, StartAX = 0, StartAY = 0, StartBX = 0, StartBY = 0, Adead_time = 0, Bdead_time = 0, AMovingTime = 30, BMovingTime = 30;
 	static int blocking_L[14], blocking_R[14], blocking_T[14], blocking_B[14];
-	static Character character[2];
-	static Bubble bubble[14];
-	static Object obj[13][15];
-	static Item item[13][15];
 	int random = rand() % 4 + 1;
 
 	switch (uMsg) {
 	case WM_CREATE:
-		DialogBox(g_hInst, MAKEINTRESOURCE(IDD_DIALOG1), hWnd, Dlalog_Proc);
+		DialogBox(g_hInst, MAKEINTRESOURCE(IDD_DIALOG1), hWnd, (DLGPROC)Dlalog_Proc);
 
 		//PlaySound(TEXT("ca_bgm.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP | SND_NODEFAULT);
 
@@ -145,21 +275,21 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		{
 		case 1:		// forest07
 			bgBit1 = (HBITMAP)LoadBitmap(g_hInst, MAKEINTRESOURCE(IDB_BITMAP16));
-			for (int y = 0; y < 13;y++)
+			for (int y = 0; y < 13; y++)
 				for (int x = 0; x < 15; x++) {
 					obj[y][x].x = x; obj[y][x].y = y; obj[y][x].kind = 2; obj[y][x].random_block = rand() % 3;
 				}
 
-			{	
-			obj[0][0].kind = 1; obj[1][0].kind = 1; obj[4][0].kind = 1;
-			obj[5][0].kind = 1; obj[8][0].kind = 1; obj[9][0].kind = 1;
-			obj[11][0].kind = 1; obj[12][0].kind = 1; obj[1][1].kind = 1;
-			obj[5][1].kind = 1; obj[3][1].kind = 1; obj[11][1].kind = 1;
-			obj[1][5].kind = 1; obj[1][6].kind = 1; obj[2][6].kind = 1;
-			obj[11][8].kind = 1; obj[11][9].kind = 1; obj[10][9].kind = 1;
-			obj[7][9].kind = 1; obj[7][10].kind = 1; obj[6][10].kind = 1;
-			obj[3][9].kind = 1; obj[3][10].kind = 1; obj[2][10].kind = 1; 
-			obj[9][11].kind = 1; 
+			{
+				obj[0][0].kind = 1; obj[1][0].kind = 1; obj[4][0].kind = 1;
+				obj[5][0].kind = 1; obj[8][0].kind = 1; obj[9][0].kind = 1;
+				obj[11][0].kind = 1; obj[12][0].kind = 1; obj[1][1].kind = 1;
+				obj[5][1].kind = 1; obj[3][1].kind = 1; obj[11][1].kind = 1;
+				obj[1][5].kind = 1; obj[1][6].kind = 1; obj[2][6].kind = 1;
+				obj[11][8].kind = 1; obj[11][9].kind = 1; obj[10][9].kind = 1;
+				obj[7][9].kind = 1; obj[7][10].kind = 1; obj[6][10].kind = 1;
+				obj[3][9].kind = 1; obj[3][10].kind = 1; obj[2][10].kind = 1;
+				obj[9][11].kind = 1;
 			}
 
 			{
@@ -202,7 +332,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 				obj[11][8].kind = 1;
 				obj[12][6].kind = 1; obj[12][7].kind = 1;
 				obj[11][0].kind = 1; obj[10][1].kind = 1; obj[11][1].kind = 1; obj[12][1].kind = 1;
-				obj[10][14].kind = 1; obj[11][14].kind = 1; obj[12][14].kind = 1; obj[12][13].kind = 1; }
+				obj[10][14].kind = 1; obj[11][14].kind = 1; obj[12][14].kind = 1; obj[12][13].kind = 1;
+			}
 
 			{
 				obj[1][1].kind = 3; obj[1][3].kind = 3; obj[3][1].kind = 3; obj[3][3].kind = 3; obj[5][1].kind = 3; obj[5][3].kind = 3;
@@ -230,13 +361,13 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 				obj[0][4].kind = 1; obj[0][5].kind = 1; obj[0][6].kind = 1; obj[0][8].kind = 1; obj[0][9].kind = 1; obj[0][10].kind = 1;
 				obj[1][3].kind = 1; obj[1][7].kind = 1; obj[1][11].kind = 1;
 				obj[2][2].kind = 1; obj[2][4].kind = 1; obj[2][6].kind = 1; obj[2][8].kind = 1; obj[2][10].kind = 1; obj[2][12].kind = 1;
-				obj[3][1].kind = 1; obj[4][1].kind = 1; obj[5][1].kind = 1; obj[6][1].kind = 1; 
-				obj[3][13].kind = 1; obj[4][13].kind = 1; obj[5][13].kind = 1; obj[6][13].kind = 1; 
+				obj[3][1].kind = 1; obj[4][1].kind = 1; obj[5][1].kind = 1; obj[6][1].kind = 1;
+				obj[3][13].kind = 1; obj[4][13].kind = 1; obj[5][13].kind = 1; obj[6][13].kind = 1;
 				obj[3][3].kind = 1; obj[3][11].kind = 1; obj[5][3].kind = 1; obj[5][11].kind = 1;
 				obj[9][4].kind = 1; obj[9][6].kind = 1; obj[9][8].kind = 1; obj[9][10].kind = 1;
 				obj[8][3].kind = 1; obj[8][11].kind = 1;
 				obj[7][10].kind = 1; obj[7][10].kind = 1; obj[7][10].kind = 1; obj[7][10].kind = 1;
-				obj[10][2].kind = 1; obj[11][2].kind = 1; obj[12][2].kind = 1; obj[12][1].kind = 1; 
+				obj[10][2].kind = 1; obj[11][2].kind = 1; obj[12][2].kind = 1; obj[12][1].kind = 1;
 				obj[10][12].kind = 1; obj[11][12].kind = 1; obj[12][12].kind = 1; obj[12][13].kind = 1;
 				obj[10][5].kind = 1; obj[10][9].kind = 1; obj[11][6].kind = 1; obj[11][7].kind = 1; obj[11][8].kind = 1;
 			}
@@ -261,7 +392,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		}
 
 		// character setting
-		
+
 		switch (fst_char_kind)
 		{
 		case 1:
@@ -336,7 +467,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 				break;
 			}
 		}
-			break;
+		break;
 		default:
 			break;
 		}
@@ -420,11 +551,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			break;
 		}
 
-		AMovingTime = 10 - character[0].speed; 
+		AMovingTime = 10 - character[0].speed;
 		BMovingTime = 10 - character[1].speed;
 
 		playtime = 1800;
-		SetTimer(hWnd, 1, 100, NULL);
+		SetTimer(hWnd, 1, 16, NULL);
 
 		for (int i = 0; i < 14; i++)
 		{
@@ -436,8 +567,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
 		int pop_bubble = 0;
 
-		box CharA = { character[0].x, character[0].y, character[0].x + 1, character[0].y + 1 };
-		box CharB = { character[1].x, character[1].y, character[1].x + 1, character[1].y + 1 };
+		RECT CharA = { character[0].x, character[0].y, character[0].x + 1, character[0].y + 1 };
+		RECT CharB = { character[1].x, character[1].y, character[1].x + 1, character[1].y + 1 };
 
 		// characters move
 		if (AMovingTime != 0) --AMovingTime;
@@ -501,7 +632,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 				if (bubble[i].time % 20 == 0) {
 					if (i < 6) { count1 -= 1; bubble_num[0] -= 1; }
 					else { count2 -= 1; bubble_num[1] -= 1; }
-					
+
 					pop_bubble = i; bubble[i].on = 0; bubble[i].pop = 1; bubble[i].time = 0;
 
 					//collision
@@ -525,11 +656,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 							blocking_T[pop_bubble] = bubble[pop_bubble].len - l; break;
 						}
 					}
-					box B_1 = { bubble[pop_bubble].x + 0, bubble[pop_bubble].y + 0, bubble[pop_bubble].x + 1, bubble[pop_bubble].y + 1 };							// Center
-					box B_2 = { bubble[pop_bubble].x + 1, bubble[pop_bubble].y + 0, bubble[pop_bubble].x + 1 + (bubble[pop_bubble].len - blocking_R[pop_bubble]), bubble[pop_bubble].y + 1};		// Right
-					box B_3 = { bubble[pop_bubble].x + 0 - (bubble[pop_bubble].len - blocking_L[pop_bubble]), bubble[pop_bubble].y + 0, bubble[pop_bubble].x + 0, bubble[pop_bubble].y + 1};		// Left
-					box B_4 = { bubble[pop_bubble].x + 0, bubble[pop_bubble].y + 0 - (bubble[pop_bubble].len - blocking_T[pop_bubble]), bubble[pop_bubble].x + 1, bubble[pop_bubble].y + 0};		// Top
-					box B_5 = { bubble[pop_bubble].x + 0, bubble[pop_bubble].y + 1, bubble[pop_bubble].x + 1, bubble[pop_bubble].y + 1 + (bubble[pop_bubble].len - blocking_B[pop_bubble])};		// Bottom
+					RECT B_1 = { bubble[pop_bubble].x + 0, bubble[pop_bubble].y + 0, bubble[pop_bubble].x + 1, bubble[pop_bubble].y + 1 };							// Center
+					RECT B_2 = { bubble[pop_bubble].x + 1, bubble[pop_bubble].y + 0, bubble[pop_bubble].x + 1 + (bubble[pop_bubble].len - blocking_R[pop_bubble]), bubble[pop_bubble].y + 1 };		// Right
+					RECT B_3 = { bubble[pop_bubble].x + 0 - (bubble[pop_bubble].len - blocking_L[pop_bubble]), bubble[pop_bubble].y + 0, bubble[pop_bubble].x + 0, bubble[pop_bubble].y + 1 };		// Left
+					RECT B_4 = { bubble[pop_bubble].x + 0, bubble[pop_bubble].y + 0 - (bubble[pop_bubble].len - blocking_T[pop_bubble]), bubble[pop_bubble].x + 1, bubble[pop_bubble].y + 0 };		// Top
+					RECT B_5 = { bubble[pop_bubble].x + 0, bubble[pop_bubble].y + 1, bubble[pop_bubble].x + 1, bubble[pop_bubble].y + 1 + (bubble[pop_bubble].len - blocking_B[pop_bubble]) };		// Bottom
 
 					if (collision(CharA, B_1) == 1 || collision(CharA, B_2) == 1 || collision(CharA, B_3) == 1 || collision(CharA, B_4) == 1 || collision(CharA, B_5) == 1) {
 						character[0].state = 1; ++Bscore;
@@ -546,7 +677,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		for (int y = 0; y < 14; y++) // item setting
 			for (int x = 0; x < 12; x++) {
 				if (item[y][x].on == 1) {
-					box ITEM = { x,y,x + 1,y + 1 };
+					RECT ITEM = { x,y,x + 1,y + 1 };
 					if (collision(CharA, ITEM) == 1) {
 						switch (item[y][x].kind)
 						{
@@ -605,7 +736,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 					}
 				}
 			}
-		
+
 		if (character[0].state == 1) {
 			if (++Adead_time % 30 == 0) {
 				character[0].state = 0; Adead_time = 0;
@@ -619,7 +750,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			}
 		}
 
-		
+
 		if (--playtime == 0) {
 			if (Ascore > Bscore)
 				MessageBox(hWnd, L"Player 1 WIN", L"GameResult", MB_OK);
@@ -628,18 +759,19 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			if (Ascore == Bscore)
 				MessageBox(hWnd, L"DRAW", L"GameResult", MB_OK);
 		}
-	}
- 
+
+
 
 		InvalidateRect(hWnd, NULL, FALSE);
 		break;
+	}
 	case WM_KEYDOWN: // MOVE: wasd // BUBBLE: f  0
+	{
+		RECT CharA = { character[0].x, character[0].y, character[0].x + 1, character[0].y + 1 };
+		RECT CharB = { character[1].x, character[1].y, character[1].x + 1, character[1].y + 1 };
+
 		switch (wParam)
 		{
-		box CharA = { character[0].x, character[0].y, character[0].x + 1, character[0].y + 1 };
-		box CharB = { character[1].x, character[1].y, character[1].x + 1, character[1].y + 1 };
-			
-
 		case 'a':
 		case 'A':
 			if ((character[0].x) * 50 > 0) {
@@ -731,20 +863,21 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 				bubble_num[1]++;// += 1;
 			}
 			break;
-
-
 		case VK_ESCAPE:
 			exit(1);
 			break;
-
 		default:
 			break;
 		}
+
 		InvalidateRect(hWnd, NULL, FALSE);
 		break;
+	}
 	case WM_KEYUP:
 		movementA = 0; movementB = 0;
 		AMovingTime = 0; BMovingTime = 0;
+
+		update_and_send();
 
 		InvalidateRect(hWnd, NULL, FALSE);
 		break;
