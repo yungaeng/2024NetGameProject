@@ -45,8 +45,7 @@ int main() {
 
     char recvbuf[BUFSIZE];
 
-    while (true)
-    {    
+    while (true) {
         int ret = recv(client_socket, recvbuf, sizeof(recvbuf), 0);
         if (ret == SOCKET_ERROR) {
             int error_code = WSAGetLastError();
@@ -54,24 +53,26 @@ int main() {
             break;
         }
         else if (ret == 0) {
-            // 연결 종료
-            cout << "[TCP 서버] 클라이언트 연결 종료" << endl;
+            cout << "[TCP 서버] 연결 종료" << endl;
             break;
         }
-        else
-        {
-           TestPacket* pp = reinterpret_cast<TestPacket*>(recvbuf);
-           memcpy_s(client_map, sizeof(client_map), pp->map, sizeof(pp->map));
-           break;
-        }
+        else if (ret >= sizeof(TestPacket)) {
+            TestPacket* pp = reinterpret_cast<TestPacket*>(recvbuf);
+            memcpy_s(client_map, sizeof(client_map), pp->map, sizeof(pp->map));
 
-        for (int y = 0; y < MAP_SIZE; y++)
-        {
-            for (int x = 0; x < MAP_SIZE; x++)
-                cout << client_map[x][y] << " ";
-            cout << endl;
+            // 맵 출력
+            for (int y = 0; y < MAP_SIZE; y++) {
+                for (int x = 0; x < MAP_SIZE; x++) {
+                    cout << client_map[y][x] << " ";
+                }
+                cout << endl;
+            }
+        }
+        else {
+            cout << "수신 데이터가 예상된 패킷 크기와 다릅니다." << endl;
         }
     }
+
 
     closesocket(client_socket);
     WSACleanup();

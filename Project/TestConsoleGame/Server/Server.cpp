@@ -8,6 +8,9 @@
 #include "Packet.h"
 
 using namespace std;
+char map[MAP_SIZE][MAP_SIZE] = {};
+
+
 
 SOCKET listen_sock;
 std::vector<SOCKET> Clients; // 접속된 모든 클라이언트의 소켓을 관리
@@ -60,12 +63,6 @@ DWORD WINAPI WorkerThread(LPVOID arg)
     cout << "[TCP 서버] 클라이언트 접속 : IP 주소 = " << addr << ", 포트 번호 = " << ntohs(clientaddr.sin_port) << endl;
 
     char buf[BUFSIZE]{};
-    char map[MAP_SIZE][MAP_SIZE] = {};
-
-    for (int y = 0; y < MAP_SIZE; y++)
-        for (int x = 0; x < MAP_SIZE; x++)
-            map[x][y] = '.';
-
 
     while (true) {
         int retval = recv(client_sock, (char*)&buf, sizeof(buf), 0);
@@ -87,8 +84,26 @@ DWORD WINAPI WorkerThread(LPVOID arg)
             p.type = 1;
             memcpy_s(p.map, sizeof(p.map), map, sizeof(map));
 
-            for (auto& sock : Clients)
-                send(sock, (char*)&p, sizeof(p), 0);
+            // 디버깅: 전송할 데이터 확인
+            cout << "서버에서 전송할 맵 데이터:" << endl;
+            for (int y = 0; y < MAP_SIZE; y++) {
+                for (int x = 0; x < MAP_SIZE; x++) {
+                    cout << p.map[y][x] << " ";
+                }
+                cout << endl;
+            }
+
+            // 데이터 전송
+            for (auto& sock : Clients) {
+                int sentBytes = send(sock, (char*)&p, sizeof(p), 0);
+                if (sentBytes == SOCKET_ERROR) {
+                    cout << "send 실패: " << WSAGetLastError() << endl;
+                }
+                else {
+                    cout << "send 성공: " << sentBytes << " 바이트 전송됨" << endl;
+                }
+            }
+            break;
         }
     }
     closesocket(client_sock);
@@ -100,6 +115,10 @@ int main()
     // 서버 초기화
     if (InitServer())
         return -1;
+    
+    for (int y = 0; y < MAP_SIZE; y++)
+        for (int x = 0; x < MAP_SIZE; x++)
+            map[x][y] = '.';
 
     if (sizeof(Clients) > 1)
     {
@@ -119,6 +138,31 @@ int main()
                 }
                 else {
                     CloseHandle(hWorkerThread);
+                }
+            }
+
+            TestPacket p;
+            p.size = sizeof(p);
+            p.type = 1;
+            memcpy_s(p.map, sizeof(p.map), map, sizeof(map));
+
+            // 디버깅: 전송할 데이터 확인
+            cout << "서버에서 전송할 맵 데이터:" << endl;
+            for (int y = 0; y < MAP_SIZE; y++) {
+                for (int x = 0; x < MAP_SIZE; x++) {
+                    cout << p.map[y][x] << " ";
+                }
+                cout << endl;
+            }
+
+            // 데이터 전송
+            for (auto& sock : Clients) {
+                int sentBytes = send(sock, (char*)&p, sizeof(p), 0);
+                if (sentBytes == SOCKET_ERROR) {
+                    cout << "send 실패: " << WSAGetLastError() << endl;
+                }
+                else {
+                    cout << "send 성공: " << sentBytes << " 바이트 전송됨" << endl;
                 }
             }
         }
