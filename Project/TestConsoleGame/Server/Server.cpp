@@ -60,6 +60,12 @@ DWORD WINAPI WorkerThread(LPVOID arg)
     cout << "[TCP 서버] 클라이언트 접속 : IP 주소 = " << addr << ", 포트 번호 = " << ntohs(clientaddr.sin_port) << endl;
 
     char buf[BUFSIZE]{};
+    char map[MAP_SIZE][MAP_SIZE] = {};
+
+    for (int y = 0; y < MAP_SIZE; y++)
+        for (int x = 0; x < MAP_SIZE; x++)
+            map[x][y] = '.';
+
 
     while (true) {
         int retval = recv(client_sock, (char*)&buf, sizeof(buf), 0);
@@ -76,16 +82,13 @@ DWORD WINAPI WorkerThread(LPVOID arg)
         }
         else
         {
-            Packet p;
-            Packet* pp = reinterpret_cast<Packet*>(buf);
-            int datasize = pp->size;
-
-            p.size = pp->size;
-            p.type = pp->type;
-            p.data = pp->data;
+            TestPacket p;
+            p.size = sizeof(p);
+            p.type = 1;
+            memcpy_s(p.map, sizeof(p.map), map, sizeof(map));
 
             for (auto& sock : Clients)
-                send(sock, (char*)&p, sizeof(datasize), 0);
+                send(sock, (char*)&p, sizeof(p), 0);
         }
     }
     closesocket(client_sock);

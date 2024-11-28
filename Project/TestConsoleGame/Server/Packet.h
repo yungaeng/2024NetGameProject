@@ -14,4 +14,10 @@ struct Packet {
     char data[510];
 };
 
+struct TestPacket
+{
+    char size;
+    char type;
+    char map[MAP_SIZE][MAP_SIZE];
+};
 #pragma pack(pop)

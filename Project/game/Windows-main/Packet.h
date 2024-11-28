@@ -1,4 +1,4 @@
-#pragma once
+ #pragma once
 #define SERVERPORT 9000
 #define BUFSIZE    5164
 #define MAP_SIZE    10
