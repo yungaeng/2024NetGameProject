@@ -9,8 +9,7 @@
 
 using namespace std;
 char map[MAP_SIZE][MAP_SIZE] = {};
-
-
+mutex mylock;
 
 SOCKET listen_sock;
 std::vector<SOCKET> Clients; // 접속된 모든 클라이언트의 소켓을 관리
@@ -62,6 +61,7 @@ DWORD WINAPI WorkerThread(LPVOID arg)
     inet_ntop(AF_INET, &clientaddr.sin_addr, addr, sizeof(addr));
     cout << "[TCP 서버] 클라이언트 접속 : IP 주소 = " << addr << ", 포트 번호 = " << ntohs(clientaddr.sin_port) << endl;
 
+    
     char buf[BUFSIZE]{};
 
     while (true) {
@@ -79,31 +79,11 @@ DWORD WINAPI WorkerThread(LPVOID arg)
         }
         else
         {
-            TestPacket p;
-            p.size = sizeof(p);
-            p.type = 1;
-            memcpy_s(p.map, sizeof(p.map), map, sizeof(map));
-
-            // 디버깅: 전송할 데이터 확인
-            cout << "서버에서 전송할 맵 데이터:" << endl;
-            for (int y = 0; y < MAP_SIZE; y++) {
-                for (int x = 0; x < MAP_SIZE; x++) {
-                    cout << p.map[y][x] << " ";
-                }
-                cout << endl;
-            }
-
-            // 데이터 전송
-            for (auto& sock : Clients) {
-                int sentBytes = send(sock, (char*)&p, sizeof(p), 0);
-                if (sentBytes == SOCKET_ERROR) {
-                    cout << "send 실패: " << WSAGetLastError() << endl;
-                }
-                else {
-                    cout << "send 성공: " << sentBytes << " 바이트 전송됨" << endl;
-                }
-            }
-            break;
+           // 클라이언트에서 입력이 들어오면
+           // 게임데이터 (맵)를 lock한다
+           // 게임데이터를 recv한 데이터로 변경한다.
+           // 게임데이터를 unlock한다
+           break;
         }
     }
     closesocket(client_sock);
@@ -115,45 +95,36 @@ int main()
     // 서버 초기화
     if (InitServer())
         return -1;
-    
+
     for (int y = 0; y < MAP_SIZE; y++)
         for (int x = 0; x < MAP_SIZE; x++)
             map[x][y] = '.';
 
-    if (sizeof(Clients) > 1)
+    // 서버 메인 루프
+    while (true)
     {
-        // 서버 메인 루프
-        while (true) 
-        {
-            SOCKET client_sock;
-            struct sockaddr_in clientaddr;
-            int addrlen = sizeof(clientaddr);
+        SOCKET client_sock;
+        struct sockaddr_in clientaddr;
+        int addrlen = sizeof(clientaddr);
 
-            client_sock = accept(listen_sock, (struct sockaddr*)&clientaddr, &addrlen);
-            if (client_sock != INVALID_SOCKET) {
-                Clients.emplace_back(client_sock);
-                HANDLE hWorkerThread = CreateThread(NULL, 0, WorkerThread, (LPVOID)client_sock, 0, NULL);
-                if (hWorkerThread == NULL) {
-                    closesocket(client_sock);
-                }
-                else {
-                    CloseHandle(hWorkerThread);
-                }
+        client_sock = accept(listen_sock, (struct sockaddr*)&clientaddr, &addrlen);
+        if (client_sock != INVALID_SOCKET) {
+            Clients.emplace_back(client_sock);
+            HANDLE hWorkerThread = CreateThread(NULL, 0, WorkerThread, (LPVOID)client_sock, 0, NULL);
+            if (hWorkerThread == NULL) {
+                closesocket(client_sock);
             }
+            else {
+                CloseHandle(hWorkerThread);
+            }
+        }
 
+        if (Clients.size() > 1)
+        {
             TestPacket p;
             p.size = sizeof(p);
             p.type = 1;
             memcpy_s(p.map, sizeof(p.map), map, sizeof(map));
-
-            // 디버깅: 전송할 데이터 확인
-            cout << "서버에서 전송할 맵 데이터:" << endl;
-            for (int y = 0; y < MAP_SIZE; y++) {
-                for (int x = 0; x < MAP_SIZE; x++) {
-                    cout << p.map[y][x] << " ";
-                }
-                cout << endl;
-            }
 
             // 데이터 전송
             for (auto& sock : Clients) {
@@ -165,8 +136,10 @@ int main()
                     cout << "send 성공: " << sentBytes << " 바이트 전송됨" << endl;
                 }
             }
+            Sleep(32);
         }
     }
+
     // 종료 시 모든 소켓 닫기
     for (SOCKET sock : Clients)
     {

@@ -3,6 +3,9 @@
 #define MAP_SIZE    10
 
 #pragma once
+
+#pragma pack(push, 1)
+
 enum PTYPE
 {
     LOGIN, MOVE
@@ -20,4 +23,5 @@ struct TestPacket
     char type;
     char map[MAP_SIZE][MAP_SIZE];
 };
+
 #pragma pack(pop)
