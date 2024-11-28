@@ -11,6 +11,17 @@ using namespace std;
 bool recving = true;
 char client_map[MAP_SIZE][MAP_SIZE];
 
+void printMap(char map[MAP_SIZE][MAP_SIZE]) {
+    system("cls"); // 콘솔 화면 지우기 (Windows 전용)
+    for (int y = 0; y < MAP_SIZE; y++) {
+        for (int x = 0; x < MAP_SIZE; x++) {
+            cout << map[y][x] << " ";
+        }
+        cout << endl;
+    }
+}
+
+
 DWORD WINAPI recv_thread(LPVOID arg)
 {
     SOCKET client_socket = (SOCKET)arg;
@@ -30,23 +41,16 @@ DWORD WINAPI recv_thread(LPVOID arg)
             return 0;
             break;
         }
-        else if (ret >= sizeof(TestPacket)) {
-            TestPacket* pp = reinterpret_cast<TestPacket*>(recvbuf);
+        else if (ret >= sizeof(SC_TestPacket)) {
+            SC_TestPacket* pp = reinterpret_cast<SC_TestPacket*>(recvbuf);
             memcpy_s(client_map, sizeof(client_map), pp->map, sizeof(pp->map));
 
             // 맵 출력
-            for (int y = 0; y < MAP_SIZE; y++) {
-                for (int x = 0; x < MAP_SIZE; x++) {
-                    cout << client_map[y][x] << " ";
-                }
-                cout << endl;
-            }
+            printMap(client_map);
         }
         else {
             cout << "수신 데이터가 예상된 패킷 크기와 다릅니다." << endl;
         }
-
-        Sleep(16);
     }
 }
 
@@ -95,13 +99,22 @@ int main() {
     // 송신 루프
     while (is_connected)
     {
-        string message;
-        getline(cin, message);
+        char message;
+        cin >> message;
 
-        if (message == "/quit")
+        if (message == 'q')
         {
             is_connected = false;
             break;
+        }
+        else
+        {
+            CS_TestPacket p;
+            p.size = sizeof(p);
+            p.id = 0;
+            p.key = message;
+
+            send(client_socket, (char*)&p, sizeof(p), 0);
         }
     }
 

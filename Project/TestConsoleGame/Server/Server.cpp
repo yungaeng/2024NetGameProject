@@ -9,12 +9,74 @@
 
 using namespace std;
 char map[MAP_SIZE][MAP_SIZE] = {};
+struct character
+{
+    int x, y;
+    char c;
+};
+vector<character> chars;
 mutex mylock;
 
 SOCKET listen_sock;
 std::vector<SOCKET> Clients; // 접속된 모든 클라이언트의 소켓을 관리
 
-// 서버 초기화 함수 (성공)
+void UpdateMap(char map[MAP_SIZE][MAP_SIZE], vector<character>& chars)
+{
+    mylock.lock();
+    for (auto& ch : chars)
+        map[ch.x][ch.y] = ch.c;
+    mylock.unlock();
+}
+
+// 캐릭터를 키입력에 따라 이동시키는 함수 (완료)
+void moveCharacter(char map[MAP_SIZE][MAP_SIZE], vector<character>& chars, int id, char key) {
+    if (id < 0 || id >= chars.size()) {
+        cout << "잘못된 ID: " << id << endl;
+        return;
+    }
+
+    mylock.lock();
+    character& ch = chars[id];
+    int oldx = ch.x;
+    int oldy = ch.y;
+
+    switch (key) {
+    case 'w': ch.y -= 1; break;
+    case 'a': ch.x -= 1; break;
+    case 's': ch.y += 1; break;
+    case 'd': ch.x += 1; break;
+    default: break;
+    }
+
+    // 경계 초과 검사
+    if (ch.x < 0 || ch.x >= MAP_SIZE || ch.y < 0 || ch.y >= MAP_SIZE) {
+        ch.x = oldx;
+        ch.y = oldy;
+        mylock.unlock();
+        cout << "맵 경계 초과" << endl;
+        return;
+    }
+
+    map[oldy][oldx] = '.'; // 이동 전 좌표 초기화
+    map[ch.y][ch.x] = ch.c; // 이동 후 좌표에 캐릭터 추가
+    mylock.unlock();
+}
+
+void sendMapToClients(char map[MAP_SIZE][MAP_SIZE]) {
+    SC_TestPacket p;
+    p.size = sizeof(p);
+    memcpy_s(p.map, sizeof(p.map), map, sizeof(map));
+
+    for (auto& sock : Clients) {
+        int sentBytes = send(sock, (char*)&p, sizeof(p), 0);
+        if (sentBytes == SOCKET_ERROR) {
+            cout << "send 실패: " << WSAGetLastError() << endl;
+        }
+    }
+}
+
+
+// 서버 초기화 함수 (완료)
 int InitServer()
 {
     WSADATA wsa;
@@ -61,7 +123,21 @@ DWORD WINAPI WorkerThread(LPVOID arg)
     inet_ntop(AF_INET, &clientaddr.sin_addr, addr, sizeof(addr));
     cout << "[TCP 서버] 클라이언트 접속 : IP 주소 = " << addr << ", 포트 번호 = " << ntohs(clientaddr.sin_port) << endl;
 
-    
+    srand(static_cast<unsigned int>(time(0)));
+    int x = rand() % MAP_SIZE;
+    int y = rand() % MAP_SIZE;
+    character c = { x,y,'@' };
+    chars.push_back(c);
+    UpdateMap(map, chars);
+
+    cout << "캐릭터 생성!! : " << " X : " << x << " Y :" << y << endl;
+    for (int y = 0; y < MAP_SIZE; y++)
+    {
+        for (int x = 0; x < MAP_SIZE; x++)
+            cout << map[x][y] << ' ';
+        cout << endl;
+    }
+
     char buf[BUFSIZE]{};
 
     while (true) {
@@ -79,11 +155,12 @@ DWORD WINAPI WorkerThread(LPVOID arg)
         }
         else
         {
-           // 클라이언트에서 입력이 들어오면
-           // 게임데이터 (맵)를 lock한다
-           // 게임데이터를 recv한 데이터로 변경한다.
-           // 게임데이터를 unlock한다
-           break;
+            CS_TestPacket* pp = reinterpret_cast<CS_TestPacket*>(buf);
+           
+            moveCharacter(map, chars, pp->id, pp->key);
+            sendMapToClients(map);
+            cout << "캐릭터 이동!!";
+            break;
         }
     }
     closesocket(client_sock);
@@ -121,9 +198,10 @@ int main()
 
         if (Clients.size() > 1)
         {
-            TestPacket p;
+            UpdateMap(map, chars);
+
+            SC_TestPacket p;
             p.size = sizeof(p);
-            p.type = 1;
             memcpy_s(p.map, sizeof(p.map), map, sizeof(map));
 
             // 데이터 전송

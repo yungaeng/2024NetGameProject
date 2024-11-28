@@ -11,17 +11,18 @@ enum PTYPE
     LOGIN, MOVE
 };
 
-struct Packet {
-    char size;
-    char type;
-    char data[510];
-};
-
-struct TestPacket
+struct SC_TestPacket
 {
     char size;
-    char type;
     char map[MAP_SIZE][MAP_SIZE];
 };
+
+struct CS_TestPacket
+{
+    char size;
+    int id;
+    char key;
+};
+
 
 #pragma pack(pop)
