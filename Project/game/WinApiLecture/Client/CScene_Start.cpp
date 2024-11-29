@@ -444,18 +444,8 @@ void CScene_Start::Enter()
 	CObject* pGround1 = new CGround;
 	pGround1->SetName(L"Ground");
 	pGround1->SetPos(Vec2(3500.f, 800.f));
-	pGround1->SetScale(Vec2(7000.f, 200.f));
+	pGround1->SetScale(Vec2(7000.f, 400.f));
 	AddObject(pGround1, GROUP_TYPE::GROUND);
-
-	{
-		// 24/-11/15 2인용플레이 땅 추가
-		//// 땅 물체 배치 
-		CObject* pGround1 = new CGround;
-		pGround1->SetName(L"Ground");
-		pGround1->SetPos(Vec2(3500.f, 400.f));
-		pGround1->SetScale(Vec2(7000.f, 200.f));
-		AddObject(pGround1, GROUP_TYPE::GROUND);
-	}
 
 	CObject* pGround11 = new CGround;
 	pGround11->SetName(L"Ground");
@@ -467,19 +457,6 @@ void CScene_Start::Enter()
 	pBigPotion->SetPos(Vec2(4000.f, 340.f));
 	pBigPotion->SetScale(Vec2(60.f, 60.f));
 	AddObject(pBigPotion, GROUP_TYPE::BLOCK);
-
-	{
-		CObject* pGround11 = new CGround;
-		pGround11->SetName(L"Ground");
-		pGround11->SetPos(Vec2(4000.f, 40.f));
-		pGround11->SetScale(Vec2(700.f, 100.f));
-		AddObject(pGround11, GROUP_TYPE::GROUND);
-		CObject* pBigPotion = new CBlock;
-		pBigPotion->SetName(L"Big_Potion");
-		pBigPotion->SetPos(Vec2(4000.f, -20.f));
-		pBigPotion->SetScale(Vec2(60.f, 60.f));
-		AddObject(pBigPotion, GROUP_TYPE::BLOCK);
-	}
 
 	CMonster* pMon = CMonFactory::CreateMonster(MON_TYPE::NORMAL, Vec2(4350.f, 540.f));
 	AddObject(pMon, GROUP_TYPE::MONSTER);
@@ -503,8 +480,6 @@ void CScene_Start::Enter()
 	pGround22->SetPos(Vec2(9500.f, 240.f));
 	pGround22->SetScale(Vec2(300.f, 100.f));
 	AddObject(pGround22, GROUP_TYPE::GROUND);
-
-	
 
 	// 06/16 거대화 포션 추가 - 테스트
 	pBigPotion = new CBlock;

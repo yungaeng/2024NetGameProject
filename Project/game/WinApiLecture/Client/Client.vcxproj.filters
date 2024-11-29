@@ -158,6 +158,9 @@
     <Filter Include="Engine\05. Scene\Intro">
       <UniqueIdentifier>{0a58f21c-19b5-41fe-9a55-d2e499e95ec2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Networking">
+      <UniqueIdentifier>{a03b32ed-d478-416a-b6ac-cdc0588e6b79}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -450,6 +453,9 @@
     </ClCompile>
     <ClCompile Include="CScene_Intro.cpp">
       <Filter>Engine\05. Scene\Intro</Filter>
+    </ClCompile>
+    <ClCompile Include="Client.cpp">
+      <Filter>Networking</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
