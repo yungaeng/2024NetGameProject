@@ -5,8 +5,6 @@
 #include <ws2tcpip.h>
 #include <thread>
 #include "..\..\CookierunServer\CookierunServer\protocol.h"
-
-
 using namespace std;
 
 bool recving = true;
@@ -30,8 +28,8 @@ DWORD WINAPI recv_thread(LPVOID arg)
             return 0;
             break;
         }
-        else if (ret >= sizeof(SC_TestPacket)) {
-            SC_TestPacket* pp = reinterpret_cast<SC_TestPacket*>(recvbuf);
+        else if (ret >= sizeof(SC_Packet)) {
+            SC_Packet* pp = reinterpret_cast<SC_Packet*>(recvbuf);
            
         }
         else {
@@ -72,49 +70,37 @@ int Networking::Init()
     char addr[INET_ADDRSTRLEN];
     inet_ntop(AF_INET, &server_addr.sin_addr, addr, sizeof(addr));
     cerr << "[TCP 서버] 클라이언트 접속 : IP 주소 = " << addr << ", 포트 번호 = " << ntohs(server_addr.sin_port) << endl;
+    
+    // 서버로 부터 id를 받아서 저장
+    int getid;
+    recv(client_socket, (char*)&getid, sizeof(getid), 0);
+    client_id = getid;
     return 0;
 }
 
 void Networking::Run()
 {
     // 수신 루프
-    if (client_socket != INVALID_SOCKET) {
-        HANDLE hWorkerThread = CreateThread(NULL, 0, recv_thread, (LPVOID)client_socket, 0, NULL);
-        if (hWorkerThread == NULL) {
-            closesocket(client_socket);
-        }
-        else {
-            CloseHandle(hWorkerThread);
-        }
-    }
+    thread(recv_thread, client_socket).detach();
 
-    // 송신 루프
-    while (is_connected)
-    {
-        char message;
-        cin >> message;
-
-        if (message == 'q')
-        {
-            is_connected = false;
-            break;
-        }
-        else
-        {
-            CS_TestPacket p;
-            p.size = sizeof(p);
-            p.id = 0;
-            p.key = message;
-
-            send(client_socket, (char*)&p, sizeof(p), 0);
-            cerr << "client send data!!" << endl;
-            break;
-        }
-    }
 }
 
 void Networking::Exit()
 {
     closesocket(client_socket);
     WSACleanup();
+}
+
+void Networking::sendData(float x, float y)
+{
+    CS_Packet p;
+    p.size = sizeof(p);
+    p.id = client_id;
+    p.x = x;
+    p.y = y;
+
+    send(client_socket, (char*)&p, sizeof(p), 0);
+    cerr << "client send data!!" << endl;
+    Sleep(100);
+    return;
 }

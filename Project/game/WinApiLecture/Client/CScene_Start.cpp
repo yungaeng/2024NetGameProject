@@ -31,6 +31,9 @@
 #include "CUI.h"
 #include "CBtnUI.h"
 
+#include "Networking.h"
+Networking net;
+
 CScene_Start::CScene_Start()
 	:m_bUseForce(false)
 	, m_fForceRadius(500.f)
@@ -86,6 +89,7 @@ void Main(DWORD_PTR a, DWORD_PTR b)
 
 void End(DWORD_PTR a, DWORD_PTR b)
 {
+	
 	ChangeScene(SCENE_TYPE::EnD);
 }
 
@@ -184,7 +188,7 @@ void CScene_Start::update()
 		
 
 
-	if (KEY_HOLD(KEY::LBTN))
+	/*if (KEY_HOLD(KEY::LBTN))
 	{
 		m_bUseForce = true;
 		CreateForce();
@@ -193,7 +197,7 @@ void CScene_Start::update()
 	{
 		m_bUseForce = false;
 	}
-	
+	*/
 	
 
 	for (UINT i = 0; i < (UINT)GROUP_TYPE::END; ++i)
@@ -279,6 +283,8 @@ void CScene_Start::update()
 		if (m_fEndTime >= 2.f)
 			ChangeScene(SCENE_TYPE::EnD);
 	}
+
+	net.sendData(GetPlayer()->GetPos().x, GetPlayer()->GetPos().y);
 }
 
 void CScene_Start::finalupdate()
@@ -347,6 +353,8 @@ void CScene_Start::render(HDC _dc)
 
 void CScene_Start::Enter()
 {
+	net.Init();
+	net.Run();
 
 	CCore::GetInst()->m_iCoin = 0;
 	CCore::GetInst()->m_iHP = 5;
@@ -362,8 +370,6 @@ void CScene_Start::Enter()
 	m_csBgm->PlayToBGM(true);				// BGM으로 Play 
 	m_csBgm->SetVolume(30.f);				// 0~100 까지 볼륨 설정pNewSound
 	
-
-
 	// 해당 신이 시작될 때
 	// CObject : 백그라운드 추가
 	CObject* pObj1 = new CBackGround;
@@ -707,6 +713,8 @@ void CScene_Start::Enter()
 
 void CScene_Start::Exit()
 {
+	net.Exit();
+
 	m_csBgm->Stop();
 	CCore::GetInst()->m_iHP = ((CPlayer*)GetPlayer())->GetHP();
 	DeleteAll();

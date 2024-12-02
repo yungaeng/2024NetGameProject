@@ -5,21 +5,20 @@
 
 #pragma pack(push, 1)
 
-enum PTYPE
+struct SC_Packet
 {
-    LOGIN, MOVE
-};
-
-struct SC_TestPacket
-{
-    char size;
-};
-
-struct CS_TestPacket
-{
-    char size;
+    unsigned char size;
     int id;
-    char key;
+    float x;
+    float y;
+};
+
+struct CS_Packet
+{
+    unsigned char size;
+    int id;
+    float x;
+    float y;
 };
 
 
