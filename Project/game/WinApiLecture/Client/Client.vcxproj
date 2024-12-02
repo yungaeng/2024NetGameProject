@@ -190,6 +190,7 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="func.h" />
     <ClInclude Include="global.h" />
+    <ClInclude Include="Networking.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SelectGDI.h" />
@@ -219,7 +220,6 @@
     <ClCompile Include="CGround.cpp" />
     <ClCompile Include="CIdleState.cpp" />
     <ClCompile Include="CKeyMgr.cpp" />
-    <ClCompile Include="Client.cpp" />
     <ClCompile Include="CMissile.cpp" />
     <ClCompile Include="CMonFactory.cpp" />
     <ClCompile Include="CMonster.cpp" />
@@ -248,6 +248,7 @@
     <ClCompile Include="CFlag.cpp" />
     <ClCompile Include="func.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Networking.cpp" />
     <ClCompile Include="SelectGDI.cpp" />
   </ItemGroup>
   <ItemGroup>

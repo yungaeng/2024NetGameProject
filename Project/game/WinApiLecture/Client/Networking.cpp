@@ -1,26 +1,15 @@
 #pragma comment(lib, "ws2_32")
 
-#include <iostream>
-#include <winsock2.h>
+#include "Networking.h"
+#include "global.h"
 #include <ws2tcpip.h>
-#include "..\..\TestConsoleGame\Server\Packet.h"
-#include <windows.h>
-#include <string>
 #include <thread>
+#include "..\..\CookierunServer\CookierunServer\protocol.h"
+
+
 using namespace std;
+
 bool recving = true;
-char client_map[MAP_SIZE][MAP_SIZE];
-
-void printMap(char map[MAP_SIZE][MAP_SIZE]) {
-    system("cls"); // 콘솔 화면 지우기 (Windows 전용)
-    for (int y = 0; y < MAP_SIZE; y++) {
-        for (int x = 0; x < MAP_SIZE; x++) {
-            cout << map[y][x] << " ";
-        }
-        cout << endl;
-    }
-}
-
 
 DWORD WINAPI recv_thread(LPVOID arg)
 {
@@ -43,23 +32,22 @@ DWORD WINAPI recv_thread(LPVOID arg)
         }
         else if (ret >= sizeof(SC_TestPacket)) {
             SC_TestPacket* pp = reinterpret_cast<SC_TestPacket*>(recvbuf);
-            memcpy_s(client_map, sizeof(client_map), pp->map, sizeof(pp->map));
+           
         }
         else {
             cout << "수신 데이터가 예상된 패킷 크기와 다릅니다." << endl;
         }
 
-        // 맵 출력
-        printMap(client_map);
     }
 }
 
-int main() {
+int Networking::Init()
+{
     WSADATA wsaData;
     if (WSAStartup(MAKEWORD(2, 2), &wsaData))
         return -1;
 
-    SOCKET client_socket = socket(AF_INET, SOCK_STREAM, 0);
+    client_socket = socket(AF_INET, SOCK_STREAM, 0);
 
     SOCKADDR_IN server_addr;
     memset(&server_addr, 0, sizeof(server_addr));
@@ -67,10 +55,10 @@ int main() {
     server_addr.sin_port = htons(SERVERPORT);
     inet_pton(AF_INET, "127.0.0.1", &server_addr.sin_addr);
 
-    bool is_connected = true;
+    is_connected = true;
     if (connect(client_socket, reinterpret_cast<sockaddr*>(&server_addr), sizeof(server_addr)) == SOCKET_ERROR)
     {
-        cout << "연결이 끊겼습니다." << endl;
+        cerr << "연결이 끊겼습니다." << endl;
         is_connected = false;
         closesocket(client_socket);
         WSACleanup();
@@ -78,13 +66,17 @@ int main() {
     }
 
     // 이후 서버와 연결 됨
-    cout << "서버를 찾았습니다!!" << endl;
+    cerr << "서버를 찾았습니다!!" << endl;
     int addrlen = sizeof(server_addr);
     getpeername(client_socket, (struct sockaddr*)&server_addr, &addrlen);
     char addr[INET_ADDRSTRLEN];
     inet_ntop(AF_INET, &server_addr.sin_addr, addr, sizeof(addr));
-    cout << "[TCP 서버] 클라이언트 접속 : IP 주소 = " << addr << ", 포트 번호 = " << ntohs(server_addr.sin_port) << endl;
+    cerr << "[TCP 서버] 클라이언트 접속 : IP 주소 = " << addr << ", 포트 번호 = " << ntohs(server_addr.sin_port) << endl;
+    return 0;
+}
 
+void Networking::Run()
+{
     // 수신 루프
     if (client_socket != INVALID_SOCKET) {
         HANDLE hWorkerThread = CreateThread(NULL, 0, recv_thread, (LPVOID)client_socket, 0, NULL);
@@ -115,13 +107,14 @@ int main() {
             p.key = message;
 
             send(client_socket, (char*)&p, sizeof(p), 0);
-            cout << "send com" << endl;
+            cerr << "client send data!!" << endl;
             break;
         }
     }
+}
 
-
+void Networking::Exit()
+{
     closesocket(client_socket);
     WSACleanup();
-    return 0;
 }
