@@ -81,8 +81,15 @@ int Networking::Init()
 void Networking::Run()
 {
     // 수신 루프
-    thread(recv_thread, client_socket).detach();
-
+    if (client_socket != INVALID_SOCKET) {
+        HANDLE hWorkerThread = CreateThread(NULL, 0, recv_thread, (LPVOID)client_socket, 0, NULL);
+        if (hWorkerThread == NULL) {
+            closesocket(client_socket);
+        }
+        else {
+            CloseHandle(hWorkerThread);
+        }
+    }
 }
 
 void Networking::Exit()
