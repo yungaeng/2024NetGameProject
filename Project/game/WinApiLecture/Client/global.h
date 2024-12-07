@@ -2,8 +2,6 @@
 
 
 // 미리 컴파일된 헤더를 비활성화 한 후 사용할 전역 헤더
-#include<WinSock2.h>
-
 #include<Windows.h>
 #include<iostream>
 
