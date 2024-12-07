@@ -1,0 +1,20 @@
+[Animation Name]
+IDLE_TOP
+[Texture Key]
+PlayerTex
+[Texture Path]
+texture\link.bmp
+[Frame Count]
+1
+[Frame Index]
+0
+[Left Top]
+0 0
+[Slice Size]
+60 65
+[Offset]
+0 0
+[Duration]
+1.000000
+
+

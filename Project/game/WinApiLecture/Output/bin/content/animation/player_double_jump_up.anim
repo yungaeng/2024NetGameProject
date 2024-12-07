@@ -1,0 +1,44 @@
+[Animation Name]
+DOUBLE_JUMP_UP
+[Texture Key]
+PlayerTex
+[Texture Path]
+texture\Brave_Cookie.bmp
+[Frame Count]
+3
+[Frame Index]
+0
+[Left Top]
+277 130
+[Slice Size]
+267 140
+[Offset]
+0 0
+[Duration]
+0.100000
+
+
+[Frame Index]
+1
+[Left Top]
+549 130
+[Slice Size]
+267 140
+[Offset]
+0 0
+[Duration]
+0.100000
+
+
+[Frame Index]
+2
+[Left Top]
+821 130
+[Slice Size]
+267 140
+[Offset]
+0 0
+[Duration]
+0.100000
+
+

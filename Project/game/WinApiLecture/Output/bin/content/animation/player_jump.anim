@@ -1,0 +1,20 @@
+[Animation Name]
+JUMP_UP
+[Texture Key]
+PlayerTex
+[Texture Path]
+texture\Brave_Cookie.bmp
+[Frame Count]
+1
+[Frame Index]
+0
+[Left Top]
+5 1430
+[Slice Size]
+260 140
+[Offset]
+0 0
+[Duration]
+0.100000
+
+

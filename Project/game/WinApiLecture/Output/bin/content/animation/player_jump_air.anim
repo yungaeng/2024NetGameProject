@@ -1,0 +1,32 @@
+[Animation Name]
+JUMP_AIR
+[Texture Key]
+PlayerTex
+[Texture Path]
+texture\Brave_Cookie.bmp
+[Frame Count]
+2
+[Frame Index]
+0
+[Left Top]
+277 1365
+[Slice Size]
+267 130
+[Offset]
+0 0
+[Duration]
+0.200000
+
+
+[Frame Index]
+1
+[Left Top]
+549 1365
+[Slice Size]
+267 130
+[Offset]
+0 0
+[Duration]
+0.200000
+
+

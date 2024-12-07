@@ -1,0 +1,128 @@
+[Animation Name]
+WALK_RIGHT
+[Texture Key]
+PlayerTex
+[Texture Path]
+texture\link.bmp
+[Frame Count]
+10
+[Frame Index]
+0
+[Left Top]
+0 455
+[Slice Size]
+60 65
+[Offset]
+0 0
+[Duration]
+0.100000
+
+
+[Frame Index]
+1
+[Left Top]
+60 455
+[Slice Size]
+60 65
+[Offset]
+0 0
+[Duration]
+0.100000
+
+
+[Frame Index]
+2
+[Left Top]
+120 455
+[Slice Size]
+60 65
+[Offset]
+0 0
+[Duration]
+0.100000
+
+
+[Frame Index]
+3
+[Left Top]
+180 455
+[Slice Size]
+60 65
+[Offset]
+0 0
+[Duration]
+0.100000
+
+
+[Frame Index]
+4
+[Left Top]
+240 455
+[Slice Size]
+60 65
+[Offset]
+0 0
+[Duration]
+0.100000
+
+
+[Frame Index]
+5
+[Left Top]
+300 455
+[Slice Size]
+60 65
+[Offset]
+0 0
+[Duration]
+0.100000
+
+
+[Frame Index]
+6
+[Left Top]
+360 455
+[Slice Size]
+60 65
+[Offset]
+0 0
+[Duration]
+0.100000
+
+
+[Frame Index]
+7
+[Left Top]
+420 455
+[Slice Size]
+60 65
+[Offset]
+0 0
+[Duration]
+0.100000
+
+
+[Frame Index]
+8
+[Left Top]
+480 455
+[Slice Size]
+60 65
+[Offset]
+0 0
+[Duration]
+0.100000
+
+
+[Frame Index]
+9
+[Left Top]
+540 455
+[Slice Size]
+60 65
+[Offset]
+0 0
+[Duration]
+0.100000
+
+

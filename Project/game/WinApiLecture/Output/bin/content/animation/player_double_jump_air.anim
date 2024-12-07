@@ -1,0 +1,20 @@
+[Animation Name]
+DOUBLE_JUMP_AIR
+[Texture Key]
+PlayerTex
+[Texture Path]
+texture\Brave_Cookie.bmp
+[Frame Count]
+1
+[Frame Index]
+0
+[Left Top]
+1090 140
+[Slice Size]
+267 130
+[Offset]
+0 0
+[Duration]
+0.100000
+
+

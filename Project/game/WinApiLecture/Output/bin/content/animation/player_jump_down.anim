@@ -1,0 +1,32 @@
+[Animation Name]
+JUMP_DOWN
+[Texture Key]
+PlayerTex
+[Texture Path]
+texture\Brave_Cookie.bmp
+[Frame Count]
+2
+[Frame Index]
+0
+[Left Top]
+820 1475
+[Slice Size]
+267 140
+[Offset]
+0 0
+[Duration]
+0.100000
+
+
+[Frame Index]
+1
+[Left Top]
+1092 1475
+[Slice Size]
+267 140
+[Offset]
+0 0
+[Duration]
+0.100000
+
+
