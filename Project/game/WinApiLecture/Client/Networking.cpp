@@ -5,6 +5,7 @@
 #include <ws2tcpip.h>
 #include <thread>
 #include "..\..\CookierunServer\CookierunServer\protocol.h"
+#include "CPlayer.h"
 using namespace std;
 
 bool recving = true;
@@ -13,7 +14,7 @@ DWORD WINAPI recv_thread(LPVOID arg)
 {
     SOCKET client_socket = (SOCKET)arg;
     char recvbuf[BUFSIZE];
-
+    
     while (recving) {
         int ret = recv(client_socket, recvbuf, sizeof(recvbuf), 0);
         if (ret == SOCKET_ERROR) {
@@ -30,6 +31,8 @@ DWORD WINAPI recv_thread(LPVOID arg)
         }
         else if (ret >= sizeof(SC_Packet)) {
             SC_Packet* pp = reinterpret_cast<SC_Packet*>(recvbuf);
+
+           
            
         }
         else {
@@ -108,6 +111,16 @@ void Networking::sendData(float x, float y)
 
     send(client_socket, (char*)&p, sizeof(p), 0);
     cerr << "client send data!!" << endl;
-    Sleep(100);
     return;
+}
+
+CObject* Networking::returnPlayer()
+{
+    // CObject : CPlayer Ãß°¡
+    CObject* pObj = new CPlayer;
+    pObj->SetName(L"Player");
+    pObj->SetPos(Vec2(100.f, 384.f));
+    pObj->SetScale(Vec2(267.f, 133.f));
+
+    return pObj;
 }

@@ -2,6 +2,9 @@
 
 
 // 미리 컴파일된 헤더를 비활성화 한 후 사용할 전역 헤더
+// 윈도우 선언 전 윈속 헤더파일 선언.
+#include <WinSock2.h>
+
 #include<Windows.h>
 #include<iostream>
 

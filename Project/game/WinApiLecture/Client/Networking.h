@@ -14,5 +14,6 @@ public:
 	void Exit();
 
 	void sendData(float x, float y);
+	CObject* returnPlayer();
 };
 

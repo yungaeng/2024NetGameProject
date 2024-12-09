@@ -31,6 +31,9 @@
 #include "CUI.h"
 #include "CBtnUI.h"
 
+#include "Networking.h"
+Networking net;
+
 CScene_Start::CScene_Start()
 	:m_bUseForce(false)
 	, m_fForceRadius(500.f)
@@ -279,6 +282,9 @@ void CScene_Start::update()
 		if (m_fEndTime >= 2.f)
 			ChangeScene(SCENE_TYPE::EnD);
 	}
+
+	net.sendData(GetPlayer()->GetPos().x, GetPlayer()->GetPos().y);
+	
 }
 
 void CScene_Start::finalupdate()
@@ -347,6 +353,8 @@ void CScene_Start::render(HDC _dc)
 
 void CScene_Start::Enter()
 {
+	if (!net.Init())
+		net.Run();
 
 	CCore::GetInst()->m_iCoin = 0;
 	CCore::GetInst()->m_iHP = 5;
@@ -380,10 +388,13 @@ void CScene_Start::Enter()
 	pObj->SetScale(Vec2(267.f, 133.f));
 	AddObject(pObj, GROUP_TYPE::PLAYER);
 
-
+	// 새 접속 플레이어 추가
+	CObject* opObj = net.returnPlayer();
+	AddObject(opObj, GROUP_TYPE::PLAYER);
 
 	// 현재 씬에 플레이어 등록
 	RegisterPlayer(pObj);
+	RegisterPlayer(opObj);
 
 	// 플레이어 ★다운캐스팅 복사생성 >> 너무 기니까 clone함수 구현해서 하자
 	/*CObject* pOtherPlayer = new CPlayer(*(CPlayer*)pObj);

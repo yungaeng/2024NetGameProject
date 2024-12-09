@@ -1,15 +1,282 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\CObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\Networking.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\Networking.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\Networking.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\Networking.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CScene_Start.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\CScene_Start.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CScene_Start.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\CScene_Start.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\CObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CTimeMgr.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\CTimeMgr.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CScene_Intro.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\CScene_Intro.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CScene_Intro.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\CScene_Intro.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CPlayer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\CPlayer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CPlayer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\CPlayer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CCore.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\CCore.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CCore.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\CCore.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CResMgr.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\CResMgr.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CSoundMgr.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\CSoundMgr.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CScene.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\CScene.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CCamera.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\CCamera.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CCamera.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\CCamera.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CBackGround.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\CBackGround.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CBtnUI.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\CBtnUI.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CMonster.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\CMonster.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CBtnUI.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\CBtnUI.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CTexture.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\CTexture.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CCollider.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\CCollider.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CEventMgr.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\CEventMgr.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CBackGround.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\CBackGround.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CScene_Tool.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\CScene_Tool.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CScene_Tool.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\CScene_Tool.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CCollisionMgr.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\CCollisionMgr.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CMonFactory.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\CMonFactory.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CGround.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\CGround.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CMonFactory.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\CMonFactory.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CAnimation.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\CAnimation.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CUI.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\CUI.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CUI.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\CUI.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CScene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\CScene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CMonster.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\CMonster.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CScene_End.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\CScene_End.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CEventMgr.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\CEventMgr.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CTexture.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\CTexture.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CTile.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\CTile.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CSoundMgr.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\CSoundMgr.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CRes.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\CRes.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CIdleState.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\CIdleState.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CGround.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\CGround.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\define.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\define.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CSound.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\CSound.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CScene_End.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\CScene_End.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CSceneMgr.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\CSceneMgr.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CSceneMgr.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\CSceneMgr.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CFlag.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\CFlag.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CGravity.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\CGravity.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CBlock.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\CBlock.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CBlock.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\CBlock.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CResMgr.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\CResMgr.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\func.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\func.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CRigidBody.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\CRigidBody.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CTimeMgr.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\CTimeMgr.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\func.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\func.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CFlag.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\CFlag.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\Client.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\Client.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\JongHyeon\\Sound\\CSound.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CSound.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\CSound.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CRes.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\CRes.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\pch.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F4EF720-81E8-4814-875C-C3932C08E3E7}|Client\\Client.vcxproj|solutionrelative:Client\\pch.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.40.33807\\include\\xutility||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "DockedWidth": 207,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -18,6 +285,818 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CObject.cpp",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CObject.cpp",
+              "RelativeDocumentMoniker": "Client\\CObject.cpp",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CObject.cpp",
+              "RelativeToolTip": "Client\\CObject.cpp",
+              "ViewState": "AgIAACgAAAAAAAAAAAASwDoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-12-09T17:41:04.627Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Networking.h",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\Networking.h",
+              "RelativeDocumentMoniker": "Client\\Networking.h",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\Networking.h",
+              "RelativeToolTip": "Client\\Networking.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-12-07T07:50:34.986Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Networking.cpp",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\Networking.cpp",
+              "RelativeDocumentMoniker": "Client\\Networking.cpp",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\Networking.cpp",
+              "RelativeToolTip": "Client\\Networking.cpp",
+              "ViewState": "AgIAAG8AAAAAAAAAAAAAAHkAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-12-07T07:50:33.065Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "CMonster.cpp",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CMonster.cpp",
+              "RelativeDocumentMoniker": "Client\\CMonster.cpp",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CMonster.cpp",
+              "RelativeToolTip": "Client\\CMonster.cpp",
+              "ViewState": "AQIAAI0AAAAAAAAAAIAwwKoAAAACAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-06-13T11:23:53.441Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "CRes.cpp",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CRes.cpp",
+              "RelativeDocumentMoniker": "Client\\CRes.cpp",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CRes.cpp",
+              "RelativeToolTip": "Client\\CRes.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-06-01T11:54:16.665Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "CObject.h",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CObject.h",
+              "RelativeDocumentMoniker": "Client\\CObject.h",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CObject.h",
+              "RelativeToolTip": "Client\\CObject.h",
+              "ViewState": "AgIAABMAAAAAAAAAAAAWwCIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-06-03T08:18:09.274Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 47,
+              "Title": "CSound.cpp",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CSound.cpp",
+              "RelativeDocumentMoniker": "Client\\CSound.cpp",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CSound.cpp",
+              "RelativeToolTip": "Client\\CSound.cpp",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAAAA8AAAAZAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-06-01T11:58:13.981Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "CResMgr.cpp",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CResMgr.cpp",
+              "RelativeDocumentMoniker": "Client\\CResMgr.cpp",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CResMgr.cpp",
+              "RelativeToolTip": "Client\\CResMgr.cpp",
+              "ViewState": "AQIAAA8AAAAAAAAAAAAAACsAAAACAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-06-16T06:51:55.981Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "CSoundMgr.h",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CSoundMgr.h",
+              "RelativeDocumentMoniker": "Client\\CSoundMgr.h",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CSoundMgr.h",
+              "RelativeToolTip": "Client\\CSoundMgr.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAOAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-06-01T12:01:33.85Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "CTimeMgr.cpp",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CTimeMgr.cpp",
+              "RelativeDocumentMoniker": "Client\\CTimeMgr.cpp",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CTimeMgr.cpp",
+              "RelativeToolTip": "Client\\CTimeMgr.cpp",
+              "ViewState": "AgIAACQAAAAAAAAAAAAAADUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-06-05T08:18:41.205Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "CScene_Intro.cpp",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CScene_Intro.cpp",
+              "RelativeDocumentMoniker": "Client\\CScene_Intro.cpp",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CScene_Intro.cpp",
+              "RelativeToolTip": "Client\\CScene_Intro.cpp",
+              "ViewState": "AQIAABgAAAAAAAAAAIAwwCMAAAACAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-06-16T15:14:54.978Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "CScene_Intro.h",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CScene_Intro.h",
+              "RelativeDocumentMoniker": "Client\\CScene_Intro.h",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CScene_Intro.h",
+              "RelativeToolTip": "Client\\CScene_Intro.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAOAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-06-16T15:14:51.789Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "CBtnUI.cpp",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CBtnUI.cpp",
+              "RelativeDocumentMoniker": "Client\\CBtnUI.cpp",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CBtnUI.cpp",
+              "RelativeToolTip": "Client\\CBtnUI.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAADAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-06-16T16:52:59.207Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "CBtnUI.h",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CBtnUI.h",
+              "RelativeDocumentMoniker": "Client\\CBtnUI.h",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CBtnUI.h",
+              "RelativeToolTip": "Client\\CBtnUI.h",
+              "ViewState": "AQIAABYAAAAAAAAAAIAwwCkAAAAGAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-06-16T16:53:03.169Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "CSoundMgr.cpp",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CSoundMgr.cpp",
+              "RelativeDocumentMoniker": "Client\\CSoundMgr.cpp",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CSoundMgr.cpp",
+              "RelativeToolTip": "Client\\CSoundMgr.cpp",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAABYAAAACAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-06-16T06:49:15.519Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "CCore.cpp",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CCore.cpp",
+              "RelativeDocumentMoniker": "Client\\CCore.cpp",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CCore.cpp",
+              "RelativeToolTip": "Client\\CCore.cpp",
+              "ViewState": "AQIAACcAAAAAAAAAAIAwwDUAAAAtAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-06-01T11:39:25.373Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 65,
+              "Title": "pch.h",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\pch.h",
+              "RelativeDocumentMoniker": "Client\\pch.h",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\pch.h",
+              "RelativeToolTip": "Client\\pch.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAQAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-05-28T15:09:18.995Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 55,
+              "Title": "CResMgr.h",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CResMgr.h",
+              "RelativeDocumentMoniker": "Client\\CResMgr.h",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CResMgr.h",
+              "RelativeToolTip": "Client\\CResMgr.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-06-10T03:01:30.532Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "main.cpp",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\main.cpp",
+              "RelativeDocumentMoniker": "Client\\main.cpp",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\main.cpp",
+              "RelativeToolTip": "Client\\main.cpp",
+              "ViewState": "AQIAAD8AAAAAAAAAAAAAAE0AAABCAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-05-28T14:53:36.091Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "CScene_End.cpp",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CScene_End.cpp",
+              "RelativeDocumentMoniker": "Client\\CScene_End.cpp",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CScene_End.cpp",
+              "RelativeToolTip": "Client\\CScene_End.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-06-15T10:19:57.725Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 49,
+              "Title": "CSceneMgr.cpp",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CSceneMgr.cpp",
+              "RelativeDocumentMoniker": "Client\\CSceneMgr.cpp",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CSceneMgr.cpp",
+              "RelativeToolTip": "Client\\CSceneMgr.cpp",
+              "ViewState": "AQIAABIAAAAAAAAAAAAAACoAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-05-28T14:35:19.197Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "CCore.h",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CCore.h",
+              "RelativeDocumentMoniker": "Client\\CCore.h",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CCore.h",
+              "RelativeToolTip": "Client\\CCore.h",
+              "ViewState": "AQIAAGMAAAAAAAAAAAAAAHIAAAAHAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-05-26T06:23:29.41Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 53,
+              "Title": "CBlock.cpp",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CBlock.cpp",
+              "RelativeDocumentMoniker": "Client\\CBlock.cpp",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CBlock.cpp",
+              "RelativeToolTip": "Client\\CBlock.cpp",
+              "ViewState": "AQIAAF4AAAAAAAAAAAASwHEAAABBAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-05-28T14:41:49.94Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "CEventMgr.cpp",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CEventMgr.cpp",
+              "RelativeDocumentMoniker": "Client\\CEventMgr.cpp",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CEventMgr.cpp",
+              "RelativeToolTip": "Client\\CEventMgr.cpp",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAcwBoAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-06-15T08:32:50.707Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "CScene.cpp",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CScene.cpp",
+              "RelativeDocumentMoniker": "Client\\CScene.cpp",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CScene.cpp",
+              "RelativeToolTip": "Client\\CScene.cpp",
+              "ViewState": "AQIAAFAAAAAAAAAAAADgv1sAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-05-28T14:44:36.308Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "CMonster.h",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CMonster.h",
+              "RelativeDocumentMoniker": "Client\\CMonster.h",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CMonster.h",
+              "RelativeToolTip": "Client\\CMonster.h",
+              "ViewState": "AQIAAB4AAAAAAAAAAAAAADMAAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-06-13T11:53:21.971Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "CEventMgr.h",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CEventMgr.h",
+              "RelativeDocumentMoniker": "Client\\CEventMgr.h",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CEventMgr.h",
+              "RelativeToolTip": "Client\\CEventMgr.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-06-15T04:55:38.724Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "CScene.h",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CScene.h",
+              "RelativeDocumentMoniker": "Client\\CScene.h",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CScene.h",
+              "RelativeToolTip": "Client\\CScene.h",
+              "ViewState": "AQIAABYAAAAAAAAAAAAmwDQAAAAUAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-05-28T14:44:13.161Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "CBackGround.h",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CBackGround.h",
+              "RelativeDocumentMoniker": "Client\\CBackGround.h",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CBackGround.h",
+              "RelativeToolTip": "Client\\CBackGround.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAHAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-06-15T05:32:14.908Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "CBackGround.cpp",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CBackGround.cpp",
+              "RelativeDocumentMoniker": "Client\\CBackGround.cpp",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CBackGround.cpp",
+              "RelativeToolTip": "Client\\CBackGround.cpp",
+              "ViewState": "AQIAABgAAAAAAAAAAAAAADIAAAAnAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-06-15T05:32:23.567Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 56,
+              "Title": "func.cpp",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\func.cpp",
+              "RelativeDocumentMoniker": "Client\\func.cpp",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\func.cpp",
+              "RelativeToolTip": "Client\\func.cpp",
+              "ViewState": "AQIAABUAAAAAAAAAAAAIwFkAAAAgAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-05-28T15:03:31.774Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "CCollider.h",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CCollider.h",
+              "RelativeDocumentMoniker": "Client\\CCollider.h",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CCollider.h",
+              "RelativeToolTip": "Client\\CCollider.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAPAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-06-05T07:54:01.249Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "CTexture.cpp",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CTexture.cpp",
+              "RelativeDocumentMoniker": "Client\\CTexture.cpp",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CTexture.cpp",
+              "RelativeToolTip": "Client\\CTexture.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB0AAAAYAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-06-05T06:35:30.277Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 58,
+              "Title": "CTimeMgr.h",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CTimeMgr.h",
+              "RelativeDocumentMoniker": "Client\\CTimeMgr.h",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CTimeMgr.h",
+              "RelativeToolTip": "Client\\CTimeMgr.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABoAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-06-05T08:18:45.8Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 57,
+              "Title": "CRigidBody.h",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CRigidBody.h",
+              "RelativeDocumentMoniker": "Client\\CRigidBody.h",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CRigidBody.h",
+              "RelativeToolTip": "Client\\CRigidBody.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABcAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-05-26T10:34:13.888Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "CTexture.h",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CTexture.h",
+              "RelativeDocumentMoniker": "Client\\CTexture.h",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CTexture.h",
+              "RelativeToolTip": "Client\\CTexture.h",
+              "ViewState": "AQIAAAEAAAAAAAAAAADgvxEAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-06-05T06:35:31.307Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "CCamera.cpp",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CCamera.cpp",
+              "RelativeDocumentMoniker": "Client\\CCamera.cpp",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CCamera.cpp",
+              "RelativeToolTip": "Client\\CCamera.cpp",
+              "ViewState": "AQIAAA8AAAAAAAAAAAAAACQAAAADAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-06-01T12:55:29.51Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "CCamera.h",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CCamera.h",
+              "RelativeDocumentMoniker": "Client\\CCamera.h",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CCamera.h",
+              "RelativeToolTip": "Client\\CCamera.h",
+              "ViewState": "AQIAABUAAAAAAAAAAIAwwCwAAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-05-27T03:48:23.536Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 51,
+              "Title": "CFlag.cpp",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CFlag.cpp",
+              "RelativeDocumentMoniker": "Client\\CFlag.cpp",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CFlag.cpp",
+              "RelativeToolTip": "Client\\CFlag.cpp",
+              "ViewState": "AQIAACQAAAAAAAAAAAAAADEAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-06-13T11:24:24.875Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 52,
+              "Title": "CGravity.cpp",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CGravity.cpp",
+              "RelativeDocumentMoniker": "Client\\CGravity.cpp",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CGravity.cpp",
+              "RelativeToolTip": "Client\\CGravity.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB8AAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-05-27T05:57:35.972Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 46,
+              "Title": "define.h",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\define.h",
+              "RelativeDocumentMoniker": "Client\\define.h",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\define.h",
+              "RelativeToolTip": "Client\\define.h",
+              "ViewState": "AQIAABUAAAAAAAAAAIAwwCIAAAAEAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-05-28T14:45:10.916Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 48,
+              "Title": "CScene_End.h",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CScene_End.h",
+              "RelativeDocumentMoniker": "Client\\CScene_End.h",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CScene_End.h",
+              "RelativeToolTip": "Client\\CScene_End.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABgAAAACAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-06-13T11:44:25.062Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 59,
+              "Title": "func.h",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\func.h",
+              "RelativeDocumentMoniker": "Client\\func.h",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\func.h",
+              "RelativeToolTip": "Client\\func.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-05-28T15:08:48.228Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 50,
+              "Title": "CSceneMgr.h",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CSceneMgr.h",
+              "RelativeDocumentMoniker": "Client\\CSceneMgr.h",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CSceneMgr.h",
+              "RelativeToolTip": "Client\\CSceneMgr.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABkAAAALAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-06-13T11:34:20.914Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "CCollisionMgr.cpp",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CCollisionMgr.cpp",
+              "RelativeDocumentMoniker": "Client\\CCollisionMgr.cpp",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CCollisionMgr.cpp",
+              "RelativeToolTip": "Client\\CCollisionMgr.cpp",
+              "ViewState": "AQIAAEcAAAAAAAAAAAAvwHAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-05-27T12:18:49.38Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 60,
+              "Title": "CFlag.h",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CFlag.h",
+              "RelativeDocumentMoniker": "Client\\CFlag.h",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CFlag.h",
+              "RelativeToolTip": "Client\\CFlag.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-06-13T11:54:24.901Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 54,
+              "Title": "CBlock.h",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CBlock.h",
+              "RelativeDocumentMoniker": "Client\\CBlock.h",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CBlock.h",
+              "RelativeToolTip": "Client\\CBlock.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAAHAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-05-28T14:41:45.039Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 66,
+              "Title": "xutility",
+              "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.40.33807\\include\\xutility",
+              "ToolTip": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.40.33807\\include\\xutility",
+              "ViewState": "AQIAACwSAAAAAAAAAAAcwD8SAAARAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-06-13T12:59:21.947Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "CScene_Tool.h",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CScene_Tool.h",
+              "RelativeDocumentMoniker": "Client\\CScene_Tool.h",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CScene_Tool.h",
+              "RelativeToolTip": "Client\\CScene_Tool.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-06-05T07:05:30.16Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "CScene_Tool.cpp",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CScene_Tool.cpp",
+              "RelativeDocumentMoniker": "Client\\CScene_Tool.cpp",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CScene_Tool.cpp",
+              "RelativeToolTip": "Client\\CScene_Tool.cpp",
+              "ViewState": "AQIAACkAAAAAAAAAAIAwwDcAAABMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-06-04T05:07:44.082Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 61,
+              "Title": "Client.h",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\Client.h",
+              "RelativeDocumentMoniker": "Client\\Client.h",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\Client.h",
+              "RelativeToolTip": "Client\\Client.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-06-05T06:34:41.224Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "CTile.h",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CTile.h",
+              "RelativeDocumentMoniker": "Client\\CTile.h",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CTile.h",
+              "RelativeToolTip": "Client\\CTile.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-06-05T06:53:53.328Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "CUI.h",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CUI.h",
+              "RelativeDocumentMoniker": "Client\\CUI.h",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CUI.h",
+              "RelativeToolTip": "Client\\CUI.h",
+              "ViewState": "AQIAABsAAAAAAAAAAAAAABYAAAAHAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-06-04T04:59:52.161Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "CUI.cpp",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CUI.cpp",
+              "RelativeDocumentMoniker": "Client\\CUI.cpp",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CUI.cpp",
+              "RelativeToolTip": "Client\\CUI.cpp",
+              "ViewState": "AQIAADMAAAAAAAAAAADgv0QAAAAgAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-06-04T04:59:47.05Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 63,
+              "Title": "CSound.h",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CSound.h",
+              "RelativeDocumentMoniker": "Client\\CSound.h",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CSound.h",
+              "RelativeToolTip": "Client\\CSound.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-06-01T11:57:57.266Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 64,
+              "Title": "CRes.h",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CRes.h",
+              "RelativeDocumentMoniker": "Client\\CRes.h",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CRes.h",
+              "RelativeToolTip": "Client\\CRes.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-06-01T11:54:17.212Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 62,
+              "Title": "CSound.cpp",
+              "DocumentMoniker": "C:\\Users\\JongHyeon\\Sound\\CSound.cpp",
+              "ToolTip": "C:\\Users\\JongHyeon\\Sound\\CSound.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-06-01T11:43:02.354Z"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 193,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "CPlayer.cpp",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CPlayer.cpp",
+              "RelativeDocumentMoniker": "Client\\CPlayer.cpp",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CPlayer.cpp",
+              "RelativeToolTip": "Client\\CPlayer.cpp",
+              "ViewState": "AQIAAMEBAAAAAAAAAAAawNcAAAAdAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-05-28T14:31:04.898Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CScene_Start.cpp",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CScene_Start.cpp",
+              "RelativeDocumentMoniker": "Client\\CScene_Start.cpp",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CScene_Start.cpp",
+              "RelativeToolTip": "Client\\CScene_Start.cpp",
+              "ViewState": "AgIAAJ8BAAAAAAAAAAAjwIcBAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-06-04T04:33:53.341Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "CAnimation.cpp",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CAnimation.cpp",
+              "RelativeDocumentMoniker": "Client\\CAnimation.cpp",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CAnimation.cpp",
+              "RelativeToolTip": "Client\\CAnimation.cpp",
+              "ViewState": "AQIAABAAAAAAAAAAAAAawCkAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-06-15T06:40:45.286Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 45,
+              "Title": "CGround.cpp",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CGround.cpp",
+              "RelativeDocumentMoniker": "Client\\CGround.cpp",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CGround.cpp",
+              "RelativeToolTip": "Client\\CGround.cpp",
+              "ViewState": "AQIAACoAAAAAAAAAAAAAAC8AAAATAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-06-15T05:32:27.211Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "CScene_Start.h",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CScene_Start.h",
+              "RelativeDocumentMoniker": "Client\\CScene_Start.h",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CScene_Start.h",
+              "RelativeToolTip": "Client\\CScene_Start.h",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAACAAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-06-01T12:00:49.745Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "CPlayer.h",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CPlayer.h",
+              "RelativeDocumentMoniker": "Client\\CPlayer.h",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CPlayer.h",
+              "RelativeToolTip": "Client\\CPlayer.h",
+              "ViewState": "AQIAAEIAAAAAAAAAAAAAAEcAAAApAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-05-26T10:58:39.591Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "CIdleState.cpp",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CIdleState.cpp",
+              "RelativeDocumentMoniker": "Client\\CIdleState.cpp",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CIdleState.cpp",
+              "RelativeToolTip": "Client\\CIdleState.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACEAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-06-15T07:42:57.419Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "CGround.h",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CGround.h",
+              "RelativeDocumentMoniker": "Client\\CGround.h",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CGround.h",
+              "RelativeToolTip": "Client\\CGround.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABgAAAACAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-06-15T05:32:52.355Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "CMonFactory.cpp",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CMonFactory.cpp",
+              "RelativeDocumentMoniker": "Client\\CMonFactory.cpp",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CMonFactory.cpp",
+              "RelativeToolTip": "Client\\CMonFactory.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABgAAAATAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-06-15T07:24:57.492Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "CMonFactory.h",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CMonFactory.h",
+              "RelativeDocumentMoniker": "Client\\CMonFactory.h",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\WinApiLecture\\Client\\CMonFactory.h",
+              "RelativeToolTip": "Client\\CMonFactory.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-06-16T06:04:07.382Z"
             }
           ]
         }
