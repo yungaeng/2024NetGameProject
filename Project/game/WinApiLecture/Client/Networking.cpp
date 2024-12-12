@@ -12,38 +12,6 @@
 using namespace std;
 bool recving = true;
 
-DWORD WINAPI recv_thread(LPVOID arg)
-{
-    SOCKET client_socket = (SOCKET)arg;
-
-    char recvbuf[BUFSIZE];
-
-    while (recving) {
-        int ret = recv(client_socket, recvbuf, sizeof(recvbuf), 0);
-        if (ret == SOCKET_ERROR) {
-            int error_code = WSAGetLastError();
-            cout << "recv 실패. 에러 코드: " << error_code << endl;
-            break;
-        }
-        else if (ret == 0) {
-            cout << "[TCP 서버] 연결 종료" << endl;
-            recving = false;
-            closesocket(client_socket);
-            return 0;
-            break;
-        }
-        else if (ret >= sizeof(SC_Packet)) {
-            SC_Packet* pp = reinterpret_cast<SC_Packet*>(recvbuf);
-            net.setother(pp->type);
-            break;
-        }
-        else {
-            cout << "수신 데이터가 예상된 패킷 크기와 다릅니다." << endl;
-        }
-
-    }
-}
-
 int Networking::Init()
 {
     WSADATA wsaData;
@@ -86,16 +54,7 @@ int Networking::Init()
 
 void Networking::Run()
 {
-    // 수신 루프
-    if (client_socket != INVALID_SOCKET) {
-        HANDLE hWorkerThread = CreateThread(NULL, 0, recv_thread, (LPVOID)client_socket, 0, NULL);
-        if (hWorkerThread == NULL) {
-            closesocket(client_socket);
-        }
-        else {
-            CloseHandle(hWorkerThread);
-        }
-    }
+    std::thread([this]() { recv_thread(client_socket); }).detach();
 }
 
 void Networking::Exit()
@@ -131,14 +90,15 @@ void Networking::sendJump()
     send(client_socket, (char*)&p, sizeof(p), 0);
 }
 
-int Networking::getother()
+void Networking::sendPos()
 {
-    return other_state;
-}
-
-void Networking::setother(int v)
-{
-    other_state = v;
+    CS_Packet p;
+    p.size = sizeof(p);
+    p.id = client_id;
+    p.type = CIDLE;
+    p.x = px;
+    p.y = py;
+    send(client_socket, (char*)&p, sizeof(p), 0);
 }
 
 CObject* Networking::CreatePlayer()
@@ -146,10 +106,52 @@ CObject* Networking::CreatePlayer()
     // CObject : CPlayer 추가
     CObject* pObj = new CPlayer;
     pObj->SetName(L"Player");
-    pObj->SetPos(Vec2(0.f, 384.f));
+    pObj->SetPos(Vec2(px, py));
     pObj->SetScale(Vec2(267.f + rand() % 10, 133.f));
 
     return pObj;
+}
+
+void Networking::recv_thread(SOCKET client_socket)
+{
+    char recvbuf[BUFSIZE];
+    while (recving) {
+        int ret = recv(client_socket, recvbuf, sizeof(recvbuf), 0);
+        if (ret == SOCKET_ERROR) {
+            int error_code = WSAGetLastError();
+            cout << "recv 실패. 에러 코드: " << error_code << endl;
+            break;
+        }
+        else if (ret == 0) {
+            cout << "[TCP 서버] 연결 종료" << endl;
+            recving = false;
+            closesocket(client_socket);
+            return;
+        }
+        else if (ret >= sizeof(SC_Packet)) {
+            SC_Packet* sp = reinterpret_cast<SC_Packet*>(recvbuf);
+            switch (sp->type) {
+            case JOIN:
+                if(client_id != 0)
+                    other = JO;
+                break;
+            case QUIT:
+                other = QU;
+                break;
+            case MOVE:
+                // 움직임 다시 재정의 하기
+                break;
+            case CIDLE:
+                other = ID;
+                break;
+            default:
+                break;
+            }
+        }
+        else {
+            cout << "수신 데이터가 예상된 패킷 크기와 다릅니다." << endl;
+        }
+    }
 }
 
 

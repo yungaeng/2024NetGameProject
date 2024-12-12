@@ -17,8 +17,8 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 179,
-          "SelectedChildIndex": 3,
+          "DockedWidth": 187,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -30,28 +30,34 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "protocol.h",
-              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\CookierunServer\\CookierunServer\\protocol.h",
-              "RelativeDocumentMoniker": "CookierunServer\\protocol.h",
-              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\CookierunServer\\CookierunServer\\protocol.h",
-              "RelativeToolTip": "CookierunServer\\protocol.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-12-12T10:20:15.763Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
               "Title": "server.cpp",
               "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\CookierunServer\\CookierunServer\\server.cpp",
               "RelativeDocumentMoniker": "CookierunServer\\server.cpp",
               "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\CookierunServer\\CookierunServer\\server.cpp",
               "RelativeToolTip": "CookierunServer\\server.cpp",
-              "ViewState": "AgIAAEIAAAAAAAAAAAAAAEIAAABGAAAAAAAAAA==",
+              "ViewState": "AgIAAEYAAAAAAAAAAAAYwF0AAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-12-12T08:51:55.847Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 187,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "protocol.h",
+              "DocumentMoniker": "E:\\github rgst\\2024NetGameProject\\Project\\game\\CookierunServer\\CookierunServer\\protocol.h",
+              "RelativeDocumentMoniker": "CookierunServer\\protocol.h",
+              "ToolTip": "E:\\github rgst\\2024NetGameProject\\Project\\game\\CookierunServer\\CookierunServer\\protocol.h",
+              "RelativeToolTip": "CookierunServer\\protocol.h",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABAAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-12-12T10:20:15.763Z",
               "EditorCaption": ""
             }
           ]

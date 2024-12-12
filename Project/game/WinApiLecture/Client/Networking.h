@@ -1,4 +1,15 @@
 #pragma once
+
+
+enum OTHER
+{
+	JO,
+	QU,
+	MO,
+	ID
+};
+
+
 class Networking
 {
 public:
@@ -6,7 +17,11 @@ public:
 	bool is_connected = false;
 
 	int client_id;
-	int other_state = 3;
+	OTHER other;
+
+	float px = 0.f;
+	float py = 384.f;
+
 public:
 	int Init();
 	void Run();
@@ -15,9 +30,9 @@ public:
 	void sendEnter();
 	void sendExit();
 	void sendJump();
+	void sendPos();
 
-	int getother();
-	void setother(int v);
 	CObject* CreatePlayer();
+private:
+	void recv_thread(SOCKET client_socket);
 };
-

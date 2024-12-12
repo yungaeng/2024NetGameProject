@@ -171,11 +171,6 @@ void CScene_Start::update()
 			CCollisionMgr::GetInst()->CheckGroup(GROUP_TYPE::PLAYER, GROUP_TYPE::COIN);
 			CCollisionMgr::GetInst()->CheckGroup(GROUP_TYPE::PLAYER, GROUP_TYPE::FLAG);
 
-			// 캐릭터와 충돌
-			CCollisionMgr::GetInst()->CheckGroup(GROUP_TYPE::OTHER_PLAYER, GROUP_TYPE::BLOCK);
-			CCollisionMgr::GetInst()->CheckGroup(GROUP_TYPE::OTHER_PLAYER, GROUP_TYPE::COIN);
-			CCollisionMgr::GetInst()->CheckGroup(GROUP_TYPE::OTHER_PLAYER, GROUP_TYPE::FLAG);
-
 			// 몬스터와 코인이 충돌하면 코인 삭제 06/13
 			CCollisionMgr::GetInst()->CheckGroup(GROUP_TYPE::MONSTER, GROUP_TYPE::COIN);
 		}
@@ -288,21 +283,32 @@ void CScene_Start::update()
 			ChangeScene(SCENE_TYPE::EnD);
 	}
 
-	switch (net.getother())
+	switch (net.other)
 	{
-	case 0:
+	case JO:
 	{
 		CObject* opObj = net.CreatePlayer();
 		// 새 접속 플레이어 추가
-		AddObject(opObj, GROUP_TYPE::PLAYER);
+		//AddObject(opObj, GROUP_TYPE::PLAYER);
 		// 현재 씬에 플레이어 등록
-		RegisterPlayer(opObj);
+		//RegisterPlayer(opObj);
+		net.other = ID;  // 상태를 초기화하여 새 플레이어 생성 중복 방지
 		break;
 	}
-	case 1:
+	case QU:
+		// 플레이어 죽는 코드 추가
 		break;
-	case 2:
+	case MO:
 	{
+		// 플레이어 이동 코드 추가
+		break;
+	}
+	case ID:
+	{
+		Vec2 pos = GetPlayer()->GetPos();
+		net.px = pos.x;
+		net.py = pos.y;
+		net.sendPos();
 		break;
 	}
 	default:

@@ -18,6 +18,8 @@ struct Client
 };
 vector<Client> Clients; // 접속된 모든 클라이언트의 소켓을 관리
 mutex mylock;
+// 기존 접속중인 플레이어 위치
+float px, py;
 
 // 서버 소켓
 SOCKET listen_sock;
@@ -74,24 +76,56 @@ void WorkerThread(SOCKET client_sock, int id)
     {
         int retval = recv(client_sock, buffer, BUFSIZE, 0);
         if (retval <= 0) break;
-        CS_Packet* pp = reinterpret_cast<CS_Packet*>(buffer);
-        
-        cout << "ID: "<< pp->id << " TYPE: " << pp->type << endl;
+        CS_Packet* cp = reinterpret_cast<CS_Packet*>(buffer);
+
+        cout << "ID: " << cp->id << " TYPE: " << cp->type << endl;
 
         // 다른 클라이언트에게 데이터 전송
         mylock.lock();
         for (const auto& client : Clients) {
             if (client.socket != client_sock) {
                 SC_Packet sp;
-                sp.id = pp->id;
+                sp.id = cp->id;
                 sp.size = sizeof(sp);
-                sp.type = pp->type;
+                switch (cp->type)
+                {
+                case ENTER:
+                {    
+                    sp.type = SIDLE;
+                    // 두번째로 접속한 플레이어
+                    if (id > 0)
+                    {
+                        sp.x = px;
+                        sp.y = py;
+                        sp.type = JOIN;
+                    }
+                    break;
+                }
+                case EXIT:
+                {
+                    sp.type = QUIT;
+                    break;
+                }
+                case JUMP:
+                {
+                    sp.type = MOVE;
+                    break;
+                }
+                case CIDLE:
+                {
+                    sp.type = SIDLE;
+                    px = cp->x;
+                    py = cp->y;
+                    break;
+                }
+                default:
+                    break;
+                }
                 send(client.socket, (char*)&sp, retval, 0);
             }
         }
         mylock.unlock();
     }
-
 
     // 클라이언트 목록에서 소켓 제거
     mylock.lock();

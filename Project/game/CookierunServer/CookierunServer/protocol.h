@@ -1,11 +1,20 @@
 #define SERVERPORT 9000
 #define BUFSIZE    512
 
-enum PTYPE
+enum CSTYPE
 {
     ENTER,
     EXIT,
-    JUMP
+    JUMP,
+    CIDLE
+};
+
+enum SCTYPE
+{
+    JOIN,
+    QUIT,
+    MOVE,
+    SIDLE
 };
 
 #pragma once
@@ -15,14 +24,17 @@ struct SC_Packet
 {
     unsigned char size;
     int id;
-    PTYPE type;
+    // 1번 플레이어는 0번플레이어 위치를 모름
+    float x, y;
+    SCTYPE type;
 };
 
 struct CS_Packet
 {
     unsigned char size;
     int id;
-    PTYPE type;
+    float x, y;
+    CSTYPE type;
 };
 
 
