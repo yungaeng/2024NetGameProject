@@ -42,8 +42,6 @@ public:
 	CRigidBody* GetRigidBody() { return m_pRigidBody; }
 	CGravity* GetGravity() { return m_pGravity; }
 
-
-
 	// 충돌클래스가 필요한 객체는 충돌객체 생성(collider)
 	void CreateCollider();
 	void CreateAnimator();

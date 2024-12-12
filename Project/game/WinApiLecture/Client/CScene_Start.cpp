@@ -158,10 +158,10 @@ void CScene_Start::update()
 		else if (m_bPhase == true)
 		{
 			m_bPhase = false;
-		/*	DeleteObject(m_pUI_End);
-			DeleteObject(m_pUI_Reset);
-			DeleteObject(m_pUI_Resume);
-			DeleteObject(m_pUI_Main);*/
+			/*	DeleteObject(m_pUI_End);
+				DeleteObject(m_pUI_Reset);
+				DeleteObject(m_pUI_Resume);
+				DeleteObject(m_pUI_Main);*/
 			CCollisionMgr::GetInst()->CheckGroup(GROUP_TYPE::PLAYER, GROUP_TYPE::MONSTER);
 			CCollisionMgr::GetInst()->CheckGroup(GROUP_TYPE::MONSTER, GROUP_TYPE::PROJ_PLAYER);
 			CCollisionMgr::GetInst()->CheckGroup(GROUP_TYPE::PLAYER, GROUP_TYPE::GROUND);
@@ -170,6 +170,11 @@ void CScene_Start::update()
 			CCollisionMgr::GetInst()->CheckGroup(GROUP_TYPE::PLAYER, GROUP_TYPE::BLOCK);
 			CCollisionMgr::GetInst()->CheckGroup(GROUP_TYPE::PLAYER, GROUP_TYPE::COIN);
 			CCollisionMgr::GetInst()->CheckGroup(GROUP_TYPE::PLAYER, GROUP_TYPE::FLAG);
+
+			// 캐릭터와 충돌
+			CCollisionMgr::GetInst()->CheckGroup(GROUP_TYPE::OTHER_PLAYER, GROUP_TYPE::BLOCK);
+			CCollisionMgr::GetInst()->CheckGroup(GROUP_TYPE::OTHER_PLAYER, GROUP_TYPE::COIN);
+			CCollisionMgr::GetInst()->CheckGroup(GROUP_TYPE::OTHER_PLAYER, GROUP_TYPE::FLAG);
 
 			// 몬스터와 코인이 충돌하면 코인 삭제 06/13
 			CCollisionMgr::GetInst()->CheckGroup(GROUP_TYPE::MONSTER, GROUP_TYPE::COIN);
@@ -184,7 +189,7 @@ void CScene_Start::update()
 			vecUI[i]->update();*/
 		return;
 	}
-		
+
 
 
 	if (KEY_HOLD(KEY::LBTN))
@@ -196,8 +201,8 @@ void CScene_Start::update()
 	{
 		m_bUseForce = false;
 	}
-	
-	
+
+
 
 	for (UINT i = 0; i < (UINT)GROUP_TYPE::END; ++i)
 	{
@@ -257,7 +262,7 @@ void CScene_Start::update()
 		DeleteObject(m_vecHeart.back());
 		m_vecHeart.pop_back();
 
-		
+
 		CResMgr::GetInst()->LoadSound(L"End", L"sound\\end.wav");
 		CSound* pNewSound = CResMgr::GetInst()->FindSound(L"End");
 		pNewSound->Play();
@@ -283,8 +288,29 @@ void CScene_Start::update()
 			ChangeScene(SCENE_TYPE::EnD);
 	}
 
-	net.sendData(GetPlayer()->GetPos().x, GetPlayer()->GetPos().y);
-	
+	switch (net.getother())
+	{
+	case 0:
+	{
+		CObject* opObj = net.CreatePlayer();
+		// 새 접속 플레이어 추가
+		AddObject(opObj, GROUP_TYPE::PLAYER);
+		// 현재 씬에 플레이어 등록
+		RegisterPlayer(opObj);
+		break;
+	}
+	case 1:
+		break;
+	case 2:
+	{
+		break;
+	}
+	default:
+		break;
+	}
+
+	if (KEY_TAP(KEY::SPACE))
+		net.sendJump();
 }
 
 void CScene_Start::finalupdate()
@@ -354,8 +380,9 @@ void CScene_Start::render(HDC _dc)
 void CScene_Start::Enter()
 {
 	if (!net.Init())
+		net.sendEnter();
 		net.Run();
-
+	 
 	CCore::GetInst()->m_iCoin = 0;
 	CCore::GetInst()->m_iHP = 5;
 
@@ -382,19 +409,18 @@ void CScene_Start::Enter()
 
 
 	// CObject : CPlayer 추가
-	CObject* pObj = new CPlayer;
+	/*CObject* pObj = new CPlayer;
 	pObj->SetName(L"Player");
 	pObj->SetPos(Vec2(0.f, 384.f));
 	pObj->SetScale(Vec2(267.f, 133.f));
-	AddObject(pObj, GROUP_TYPE::PLAYER);
+	AddObject(pObj, GROUP_TYPE::PLAYER);*/
 
+	CObject* pObj = net.CreatePlayer();
 	// 새 접속 플레이어 추가
-	CObject* opObj = net.returnPlayer();
-	AddObject(opObj, GROUP_TYPE::PLAYER);
+	AddObject(pObj, GROUP_TYPE::PLAYER);
 
 	// 현재 씬에 플레이어 등록
 	RegisterPlayer(pObj);
-	RegisterPlayer(opObj);
 
 	// 플레이어 ★다운캐스팅 복사생성 >> 너무 기니까 clone함수 구현해서 하자
 	/*CObject* pOtherPlayer = new CPlayer(*(CPlayer*)pObj);
@@ -705,6 +731,11 @@ void CScene_Start::Enter()
 	CCollisionMgr::GetInst()->CheckGroup(GROUP_TYPE::PLAYER, GROUP_TYPE::COIN);
 	CCollisionMgr::GetInst()->CheckGroup(GROUP_TYPE::PLAYER, GROUP_TYPE::FLAG);
 
+	// 캐릭터와 충돌
+	CCollisionMgr::GetInst()->CheckGroup(GROUP_TYPE::OTHER_PLAYER, GROUP_TYPE::BLOCK);
+	CCollisionMgr::GetInst()->CheckGroup(GROUP_TYPE::OTHER_PLAYER, GROUP_TYPE::COIN);
+	CCollisionMgr::GetInst()->CheckGroup(GROUP_TYPE::OTHER_PLAYER, GROUP_TYPE::FLAG);
+
 	// 몬스터와 코인이 충돌하면 코인 삭제 06/13
 	CCollisionMgr::GetInst()->CheckGroup(GROUP_TYPE::MONSTER, GROUP_TYPE::COIN);
 
@@ -712,7 +743,6 @@ void CScene_Start::Enter()
 
 	// 카메라 LookAt 지정
 	//CCamera::GetInst()->SetLookAt(vResolution / 2.f);
-
 	start();
 }
 
@@ -724,6 +754,10 @@ void CScene_Start::Exit()
 
 	// 기존 해당 씬에서 지정해 놨던 충돌 그룹을 해제해 놔야 함
 	CCollisionMgr::GetInst()->Reset();
+
+	// 게임 종료시 네트워크도 종료
+	net.sendExit();
+	net.Exit();
 }
 
 void CScene_Start::CreateForce()

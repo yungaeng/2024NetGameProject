@@ -5,16 +5,19 @@
 #include <ws2tcpip.h>
 #include <thread>
 #include "..\..\CookierunServer\CookierunServer\protocol.h"
-#include "CPlayer.h"
-using namespace std;
 
+#include "CObject.h"
+#include "CPlayer.h"
+
+using namespace std;
 bool recving = true;
 
 DWORD WINAPI recv_thread(LPVOID arg)
 {
     SOCKET client_socket = (SOCKET)arg;
+
     char recvbuf[BUFSIZE];
-    
+
     while (recving) {
         int ret = recv(client_socket, recvbuf, sizeof(recvbuf), 0);
         if (ret == SOCKET_ERROR) {
@@ -31,9 +34,8 @@ DWORD WINAPI recv_thread(LPVOID arg)
         }
         else if (ret >= sizeof(SC_Packet)) {
             SC_Packet* pp = reinterpret_cast<SC_Packet*>(recvbuf);
-
-           
-           
+            net.setother(pp->type);
+            break;
         }
         else {
             cout << "수신 데이터가 예상된 패킷 크기와 다릅니다." << endl;
@@ -78,6 +80,7 @@ int Networking::Init()
     int getid;
     recv(client_socket, (char*)&getid, sizeof(getid), 0);
     client_id = getid;
+
     return 0;
 }
 
@@ -101,26 +104,53 @@ void Networking::Exit()
     WSACleanup();
 }
 
-void Networking::sendData(float x, float y)
+void Networking::sendEnter()
 {
     CS_Packet p;
     p.size = sizeof(p);
     p.id = client_id;
-    p.x = x;
-    p.y = y;
-
+    p.type = ENTER;
     send(client_socket, (char*)&p, sizeof(p), 0);
-    cerr << "client send data!!" << endl;
-    return;
 }
 
-CObject* Networking::returnPlayer()
+void Networking::sendExit()
+{
+    CS_Packet p;
+    p.size = sizeof(p);
+    p.id = client_id;
+    p.type = EXIT;
+    send(client_socket, (char*)&p, sizeof(p), 0);
+}
+
+void Networking::sendJump()
+{
+    CS_Packet p;
+    p.size = sizeof(p);
+    p.id = client_id;
+    p.type = JUMP;
+    send(client_socket, (char*)&p, sizeof(p), 0);
+}
+
+int Networking::getother()
+{
+    return other_state;
+}
+
+void Networking::setother(int v)
+{
+    other_state = v;
+}
+
+CObject* Networking::CreatePlayer()
 {
     // CObject : CPlayer 추가
     CObject* pObj = new CPlayer;
     pObj->SetName(L"Player");
-    pObj->SetPos(Vec2(100.f, 384.f));
-    pObj->SetScale(Vec2(267.f, 133.f));
+    pObj->SetPos(Vec2(0.f, 384.f));
+    pObj->SetScale(Vec2(267.f + rand() % 10, 133.f));
 
     return pObj;
 }
+
+
+

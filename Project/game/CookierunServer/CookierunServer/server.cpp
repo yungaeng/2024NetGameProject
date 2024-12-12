@@ -15,7 +15,6 @@ struct Client
 {
     SOCKET socket;
     int id;
-    float x, y;
 };
 vector<Client> Clients; // 접속된 모든 클라이언트의 소켓을 관리
 mutex mylock;
@@ -70,22 +69,24 @@ void WorkerThread(SOCKET client_sock, int id)
     inet_ntop(AF_INET, &clientaddr.sin_addr, addr, sizeof(addr));
     cout << "[TCP 서버] 클라이언트 접속, IP 주소 : " << addr << ", 포트 번호 : " << ntohs(clientaddr.sin_port) << ", ID : " << id << endl;
 
-    // 파일 데이터 전송
-    int totalReceived = 0;
     char buffer[BUFSIZE];
     while (true)
     {
         int retval = recv(client_sock, buffer, BUFSIZE, 0);
         if (retval <= 0) break;
         CS_Packet* pp = reinterpret_cast<CS_Packet*>(buffer);
-        cout << pp->x << " " << pp->y;
-        totalReceived += retval;
+        
+        cout << "ID: "<< pp->id << " TYPE: " << pp->type << endl;
 
-        // 다른 클라이언트에게 파일 데이터 전송 및 전송률 계산
+        // 다른 클라이언트에게 데이터 전송
         mylock.lock();
         for (const auto& client : Clients) {
             if (client.socket != client_sock) {
-                send(client.socket, buffer, retval, 0);
+                SC_Packet sp;
+                sp.id = pp->id;
+                sp.size = sizeof(sp);
+                sp.type = pp->type;
+                send(client.socket, (char*)&sp, retval, 0);
             }
         }
         mylock.unlock();
@@ -116,6 +117,10 @@ int main()
         mylock.unlock();
 
         // 클라로 id 보내기
+        send(clientSocket, (char*)&id, sizeof(id), 0);
+        cout << "ID: " << id << "player is connect!!" << endl;
+
+        // 클라로 인원수 보내기
         send(clientSocket, (char*)&id, sizeof(id), 0);
 
         thread(WorkerThread, clientSocket, id).detach();

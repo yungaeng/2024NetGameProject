@@ -1,24 +1,28 @@
 #define SERVERPORT 9000
 #define BUFSIZE    512
 
-#pragma once
+enum PTYPE
+{
+    ENTER,
+    EXIT,
+    JUMP
+};
 
+#pragma once
 #pragma pack(push, 1)
 
 struct SC_Packet
 {
     unsigned char size;
     int id;
-    float x;
-    float y;
+    PTYPE type;
 };
 
 struct CS_Packet
 {
     unsigned char size;
     int id;
-    float x;
-    float y;
+    PTYPE type;
 };
 
 

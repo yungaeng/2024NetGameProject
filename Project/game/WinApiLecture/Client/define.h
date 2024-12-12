@@ -39,6 +39,7 @@ enum class GROUP_TYPE
 
 	MONSTER,
 	PLAYER,
+	OTHER_PLAYER,
 	PROJ_PLAYER,	// 플레이어 투사체
 	PROJ_MONSTER,	// 몬스터 투사체
 

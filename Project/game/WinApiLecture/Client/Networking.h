@@ -6,14 +6,18 @@ public:
 	bool is_connected = false;
 
 	int client_id;
-	float x, y;
-
+	int other_state = 3;
 public:
 	int Init();
 	void Run();
 	void Exit();
 
-	void sendData(float x, float y);
-	CObject* returnPlayer();
+	void sendEnter();
+	void sendExit();
+	void sendJump();
+
+	int getother();
+	void setother(int v);
+	CObject* CreatePlayer();
 };
 
