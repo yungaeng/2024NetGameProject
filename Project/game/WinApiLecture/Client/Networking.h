@@ -22,6 +22,7 @@ public:
 	float px = 0.f;
 	float py = 384.f;
 
+	int other_coin=0;
 public:
 	int Init();
 	void Run();
@@ -30,7 +31,7 @@ public:
 	void sendEnter();
 	void sendExit();
 	void sendJump();
-	void sendPos();
+	void sendPos(int coin);
 
 	CObject* CreatePlayer();
 private:

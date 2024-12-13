@@ -289,9 +289,9 @@ void CScene_Start::update()
 	{
 		CObject* opObj = net.CreatePlayer();
 		// 새 접속 플레이어 추가
-		//AddObject(opObj, GROUP_TYPE::PLAYER);
+		AddObject(opObj, GROUP_TYPE::PLAYER);
 		// 현재 씬에 플레이어 등록
-		//RegisterPlayer(opObj);
+		RegisterPlayer(opObj);
 		net.other = ID;  // 상태를 초기화하여 새 플레이어 생성 중복 방지
 		break;
 	}
@@ -308,7 +308,7 @@ void CScene_Start::update()
 		Vec2 pos = GetPlayer()->GetPos();
 		net.px = pos.x;
 		net.py = pos.y;
-		net.sendPos();
+		net.sendPos(CCore::GetInst()->m_iCoin);
 		break;
 	}
 	default:
@@ -379,6 +379,11 @@ void CScene_Start::render(HDC _dc)
 	wchar_t wsCoin[100] = L"coin";
 	wsprintfW(wsCoin, L"COIN : %d ", CCore::GetInst()->m_iCoin);
 	TextOut(_dc, 10, 10, wsCoin, lstrlenW(wsCoin));
+	if (net.other_coin)
+	{
+		wsprintfW(wsCoin, L"OTHER_COIN : %d ", net.other_coin);
+		TextOut(_dc, 300, 10, wsCoin, lstrlenW(wsCoin));
+	}
 	SelectObject(_dc, OldFont);
 	DeleteObject(hFont);
 }

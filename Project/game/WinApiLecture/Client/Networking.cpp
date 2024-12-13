@@ -90,7 +90,7 @@ void Networking::sendJump()
     send(client_socket, (char*)&p, sizeof(p), 0);
 }
 
-void Networking::sendPos()
+void Networking::sendPos(int coin)
 {
     CS_Packet p;
     p.size = sizeof(p);
@@ -98,6 +98,7 @@ void Networking::sendPos()
     p.type = CIDLE;
     p.x = px;
     p.y = py;
+    p.coin = coin;
     send(client_socket, (char*)&p, sizeof(p), 0);
 }
 
@@ -132,8 +133,7 @@ void Networking::recv_thread(SOCKET client_socket)
             SC_Packet* sp = reinterpret_cast<SC_Packet*>(recvbuf);
             switch (sp->type) {
             case JOIN:
-                if(client_id != 0)
-                    other = JO;
+                other = JO;
                 break;
             case QUIT:
                 other = QU;
@@ -142,6 +142,7 @@ void Networking::recv_thread(SOCKET client_socket)
                 // 움직임 다시 재정의 하기
                 break;
             case CIDLE:
+                other_coin = sp->coin;
                 other = ID;
                 break;
             default:
